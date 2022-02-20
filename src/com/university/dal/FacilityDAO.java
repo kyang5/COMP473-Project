@@ -1,4 +1,4 @@
 package com.university.dal;
 
-public class CustomerDAO {
+public class FacilityDAO {
 }
