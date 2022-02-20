@@ -1,6 +1,6 @@
 package com.university.view;
 
-public class facilityClient {
+public class FacilityClient {
     public static void main(String[] args) {
     }
 }

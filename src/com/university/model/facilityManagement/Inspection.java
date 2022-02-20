@@ -1,4 +1,4 @@
 package com.university.model.facilityManagement;
 
-public class maintenanceLog {
+public class Inspection {
 }

@@ -1,4 +1,4 @@
 package com.university.model.facilityManagement;
 
-public class maintenanceWorker {
+public class MaintenanceWorker {
 }

@@ -1,4 +1,4 @@
 package com.university.model.use;
 
-public class facilityUse {
+public class FacilityUse {
 }
