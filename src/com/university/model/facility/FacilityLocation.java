@@ -7,10 +7,10 @@ import java.util.ArrayList;
 
 public class FacilityLocation {
     private String name;
-    private Integer addressNumber;
+    private int addressNumber;
     private String streetName;
     private String city;
-    private Integer zipcode;
+    private int zipcode;
     private FacilityManager facilityManager;
     private List<FacilityDetail> facilityDetails = new ArrayList<>();
 
@@ -22,11 +22,11 @@ public class FacilityLocation {
         this.name = name;
     }
 
-    public Integer getAddressNumber() {
+    public int getAddressNumber() {
         return addressNumber;
     }
 
-    public void setAddressNumber(Integer addressNumber) {
+    public void setAddressNumber(int addressNumber) {
         this.addressNumber = addressNumber;
     }
 
@@ -46,11 +46,11 @@ public class FacilityLocation {
         this.city = city;
     }
 
-    public Integer getZipcode() {
+    public int getZipcode() {
         return zipcode;
     }
 
-    public void setZipcode(Integer zipcode) {
+    public void setZipcode(int zipcode) {
         this.zipcode = zipcode;
     }
 
