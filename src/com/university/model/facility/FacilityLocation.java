@@ -11,7 +11,8 @@ public class FacilityLocation {
     private String streetName;
     private String city;
     private Integer zipcode;
-    private List<Object> facilities = new ArrayList<>();
+    private FacilityManager facilityManager;
+    private List<FacilityDetail> facilityDetails = new ArrayList<>();
 
     public String getName() {
         return name;
@@ -53,14 +54,23 @@ public class FacilityLocation {
         this.zipcode = zipcode;
     }
 
-    public List<Object> getFacilities() {
-        return facilities;
+    public List<FacilityDetail> getFacilityDetails() {
+        return facilityDetails;
     }
 
-    public void setFacilities(List<Object> facilities) {
-        this.facilities = facilities;
+    public void setFacilityDetails(List<FacilityDetail> facilityDetails) {
+        this.facilityDetails = facilityDetails;
     }
 
-    public void addFacility() {
+    public void addFacilityDetail(FacilityDetail facilityDetail) {
+        facilityDetails.add(facilityDetail);
+    }
+
+    public FacilityManager getFacilityManager() {
+        return facilityManager;
+    }
+
+    public void setFacilityManager(FacilityManager facilityManager) {
+        this.facilityManager = facilityManager;
     }
 }
