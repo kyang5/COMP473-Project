@@ -1,6 +1,8 @@
 package com.university.model.facility;
 
-public class FacilityDetail {
+// TO DO: Extends FacilityLocation
+
+public class FacilityDetail extends FacilityLocation {
     private int phoneNumber;
     private int facilityId;
     private int roomNumber;
