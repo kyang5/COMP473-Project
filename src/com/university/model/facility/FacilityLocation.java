@@ -1,9 +1,10 @@
 package com.university.model.facility;
 
-// TO DO: Figure out add FacilityDetail & FacilityManager to facilities list.
-
 import java.util.List;
 import java.util.ArrayList;
+
+// TODO: Consider moving List<FacilityDetail> facilityDetails to UseSchedule
+// TODO: Consider changing relationship with FacilityManager to having a relationship with FacilityDetail
 
 public class FacilityLocation {
     private String name;
