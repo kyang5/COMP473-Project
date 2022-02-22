@@ -4,12 +4,18 @@ package com.university.model.use;
 // TODO: Make information from FacilityLocation or FacilityDetail available
 // TODO: Add useStartTime, useEndTime, useStartDate, and UseEndDate attributes
 
+import com.university.model.facility.FacilityDetail;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class UseSchedule {
     private boolean inUse;
     private int capacity;
     private int occupancy;
     private boolean atCapacity;
     private int usage;
+    private List<FacilityDetail> facilityDetails = new ArrayList<>();
 
 
     public boolean isInUse() {
@@ -32,12 +38,20 @@ public class UseSchedule {
 
     }
 
-    public int getUsage() {
-        return usage;
+    public List<FacilityDetail> getFacilityDetails() {
+        return facilityDetails;
     }
 
-    public void isInUseDuringInterval() {
-        //useStartTime, useEndTime
+    public void setFacilityDetails(List<FacilityDetail> facilityDetails) {
+        this.facilityDetails = facilityDetails;
+    }
+
+    public void addFacilityDetail(FacilityDetail facilityDetail) {
+        facilityDetails.add(facilityDetail);
+    }
+
+    public int getUsage() {
+        return usage;
     }
 
     public void assignFacilityToUse() {
@@ -52,6 +66,10 @@ public class UseSchedule {
 
     public void calculateUsageRate() {
 
+    }
+
+    public void isInUseDuringInterval() {
+        //useStartTime, useEndTime
     }
 
     public void setInUseDuringInterval() {
