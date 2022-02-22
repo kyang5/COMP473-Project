@@ -3,7 +3,6 @@ package com.university.model.facility;
 import java.util.List;
 import java.util.ArrayList;
 
-// TODO: Consider moving List<FacilityDetail> facilityDetails to UseSchedule
 // TODO: Consider changing relationship with FacilityManager to having a relationship with FacilityDetail
 
 public class FacilityLocation {
@@ -13,7 +12,6 @@ public class FacilityLocation {
     private String city;
     private int zipcode;
     private FacilityManager facilityManager;
-    private List<FacilityDetail> facilityDetails = new ArrayList<>();
 
     public String getName() {
         return name;
@@ -53,18 +51,6 @@ public class FacilityLocation {
 
     public void setZipcode(int zipcode) {
         this.zipcode = zipcode;
-    }
-
-    public List<FacilityDetail> getFacilityDetails() {
-        return facilityDetails;
-    }
-
-    public void setFacilityDetails(List<FacilityDetail> facilityDetails) {
-        this.facilityDetails = facilityDetails;
-    }
-
-    public void addFacilityDetail(FacilityDetail facilityDetail) {
-        facilityDetails.add(facilityDetail);
     }
 
     public FacilityManager getFacilityManager() {
