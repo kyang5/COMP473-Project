@@ -5,12 +5,6 @@ public class FacilityManager {
     private String managerLastName;
     private Integer managerId;
 
-    public FacilityManager(String managerFirstName, String managerLastName, Integer managerId) {
-        this.managerFirstName = managerFirstName;
-        this.managerLastName = managerLastName;
-        this.managerId = managerId;
-    }
-
     public String getManagerFirstName() {
         return managerFirstName;
     }
