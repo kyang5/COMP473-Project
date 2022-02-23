@@ -1,12 +1,12 @@
 package com.university.model.facilityManagement;
 
-import com.university.model.facility.FacilityDetail;
+import com.university.model.facility.FacilityRoom;
 import java.util.*;
 
 public class MaintenanceLog {
     private double cost;
     private Date downTime;
-    private List<FacilityDetail> maintenanceList = new ArrayList<FacilityDetail>();
+    private List<FacilityRoom> maintenanceList = new ArrayList<FacilityRoom>();
 
     public double getCost(){
         return cost;

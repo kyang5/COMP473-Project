@@ -2,12 +2,12 @@ package com.university.model.facility;
 
 // TO DO: Extends FacilityLocation
 
-public class FacilityDetail extends FacilityLocation {
+public class FacilityRoom extends FacilityLocation {
     private int phoneNumber;
     private int facilityId;
     private int roomNumber;
 
-    public FacilityDetail (int phoneNumber, int facilityId, int roomNumber) {
+    public FacilityRoom (int phoneNumber, int facilityId, int roomNumber) {
         this.phoneNumber = phoneNumber;
         this.facilityId = facilityId;
         this.roomNumber = roomNumber;
