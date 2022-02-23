@@ -10,10 +10,11 @@ public class MaintenanceRequest {
     private Boolean requestStatus;
     private String problem;
 
-    public void makeFacilityMaintRequest(){
+    //public void makeFacilityMaintRequest(){
 
-    }
+    //}removed because it already had requirements.
     public void scheduleMaintenance(){
+        //add to list.
 
     }
     public int getRequestID(){
@@ -30,6 +31,15 @@ public class MaintenanceRequest {
     }
     public int getRequestorID(){
         return requestorID;
+    }
+    public String getRequestType(){
+        return requestType;
+    }
+    public String getProblem(){
+        return problem;
+    }
+    public void setProblem(String problem){
+        this.problem = problem;
     }
     public void setRequestType(String requestType){
         this.requestType = requestType;
@@ -53,12 +63,12 @@ public class MaintenanceRequest {
         //TODO create array list?
         //TODO Insert method
     }
+    public void addMantenanceRequest(){
+        //add to list
+    }
     public void cancelMaintenanceRequest(){
         //TODO need to include a remove method
-    }
-    public void listFacilityProblems(){
-        //TODO create a list?
-        //TODO return statement
+        //just dot remove
     }
 
 }

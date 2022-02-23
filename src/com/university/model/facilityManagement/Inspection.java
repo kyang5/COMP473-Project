@@ -1,6 +1,7 @@
 package com.university.model.facilityManagement;
 import java.util.ArrayList;
 import java.util.List;
+
 //TODO consider changing inspectionLog to a List or other type
 //TODO check add method.
 //TODO check remove method
@@ -9,7 +10,7 @@ public class Inspection {
     private String inspectionName;
     private int inspectionLog;
     private int inspectionID;
-    private List<Inspector> inspectors = new ArrayList<>();
+    private List<Inspector> inspectorList = new ArrayList<>();
 
     public String getInspectionName(){
         return inspectionName;
@@ -30,11 +31,11 @@ public class Inspection {
         this.inspectionID = inspectionID;
     }
     public void addInspector(Inspector inspector){
-        inspectors.add(inspector);
+        inspectorList.add(inspector);
 
     }
     public void removeInspector(Inspector inspector){
-        inspectors.remove(inspector);
+        inspectorList.remove(inspector);
 
     }
 

@@ -1,6 +1,6 @@
 package com.university.model.facility;
 
-// TO DO: Extends FacilityLocation
+//TODO: Extends FacilityLocation
 
 public class FacilityRoom extends FacilityLocation {
     private int phoneNumber;

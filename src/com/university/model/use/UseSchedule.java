@@ -1,8 +1,9 @@
 package com.university.model.use;
 
 // TODO: Create method to calculate if reaching capacity (capacity - occupancy)
-// TODO: Make information from FacilityLocation or FacilityDetail available
+// TODO: Make information from FacilityLocation or FacilityRoom available
 // TODO: Add useStartTime, useEndTime, useStartDate, and UseEndDate attributes
+//TODO: check to see if we need to add useLog and/or change it to listactual usage.
 
 import com.university.model.facility.FacilityRoom;
 
