@@ -3,7 +3,7 @@ package com.university.model.facility;
 public class FacilityManager {
     private String managerFirstName;
     private String managerLastName;
-    private Integer managerId;
+    private int managerId;
 
     public String getManagerFirstName() {
         return managerFirstName;
@@ -21,11 +21,11 @@ public class FacilityManager {
         this.managerLastName = managerLastName;
     }
 
-    public Integer getManagerId() {
+    public int getManagerId() {
         return managerId;
     }
 
-    public void setManagerId(Integer managerId) {
+    public void setManagerId(int managerId) {
         this.managerId = managerId;
     }
 }
