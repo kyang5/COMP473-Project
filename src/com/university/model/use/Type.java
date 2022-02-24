@@ -1,13 +1,13 @@
 package com.university.model.use;
 
 public class Type {
-    private String facilityType;
+    private String facilityUseType;
 
-    public String getFacilityType() {
-        return facilityType;
+    public String getFacilityUseType() {
+        return facilityUseType;
     }
 
-    public void setFacilityType(String facilityType) {
-        this.facilityType = facilityType;
+    public void setFacilityUseType(String facilityUseType) {
+        this.facilityUseType = facilityUseType;
     }
 }
