@@ -2,8 +2,7 @@ package com.university.model.facility;
 
 import java.util.List;
 import java.util.ArrayList;
-
-// TODO: Consider changing relationship with FacilityManager to having a relationship with FacilityDetail
+import java.util.Objects;
 
 public class FacilityLocation {
     private String name;
@@ -13,6 +12,7 @@ public class FacilityLocation {
     private int zipcode;
     private int capacity;
     private FacilityManager facilityManager;
+    private List<FacilityLocation> listFacilities = new ArrayList<>();
 
     public String getName() {
         return name;
@@ -62,6 +62,22 @@ public class FacilityLocation {
         this.capacity = capacity;
     }
 
+    public List<FacilityLocation> getListFacilities() {
+        return listFacilities;
+    }
+
+    public void setListFacilities(List<FacilityLocation> listFacilities) {
+        this.listFacilities = listFacilities;
+    }
+
+    public void addFacilityLocation (FacilityLocation facility) {
+        listFacilities.add(facility);
+    }
+
+    public void removeFacilityLocation (FacilityLocation facilityLocation) {
+        listFacilities.remove(facilityLocation);
+    }
+
     public FacilityManager getFacilityManager() {
         return facilityManager;
     }
@@ -69,4 +85,5 @@ public class FacilityLocation {
     public void setFacilityManager(FacilityManager facilityManager) {
         this.facilityManager = facilityManager;
     }
+
 }
