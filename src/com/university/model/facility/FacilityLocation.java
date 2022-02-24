@@ -11,6 +11,7 @@ public class FacilityLocation {
     private String streetName;
     private String city;
     private int zipcode;
+    private int capacity;
     private FacilityManager facilityManager;
 
     public String getName() {
@@ -51,6 +52,14 @@ public class FacilityLocation {
 
     public void setZipcode(int zipcode) {
         this.zipcode = zipcode;
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
     }
 
     public FacilityManager getFacilityManager() {

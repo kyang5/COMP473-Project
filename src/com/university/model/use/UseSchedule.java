@@ -12,31 +12,27 @@ import java.util.List;
 
 public class UseSchedule {
     private boolean inUse;
-    private int capacity;
     private int occupancy;
+    private int availableCapacity;
     private boolean atCapacity;
     private int usage;
     private List<FacilityRoom> facilityDetails = new ArrayList<>();
+
+    // TODO Pass in occupancy from FacilityRoom
 
 
     public boolean isInUse() {
         return inUse;
     }
 
-    public int getCapacity() {
-        return capacity;
-    }
-
-    public void setCapacity(int capacity) {
-        this.capacity = capacity;
-    }
-
     public boolean isAtCapacity() {
-        return atCapacity;
+            return atCapacity;
     }
 
-    public void requestAvailableCapacity() {
-
+    public int requestAvailableCapacity(FacilityRoom capacity, int occupancy) {
+        // return capacity - occupancy
+        availableCapacity = capacity.getCapacity() - occupancy;
+        return availableCapacity;
     }
 
     public List<FacilityRoom> getFacilityDetails() {
@@ -56,17 +52,18 @@ public class UseSchedule {
     }
 
     public void assignFacilityToUse() {
-
+        // add to list of actual usage
     }
 
     public void vacateFacility() {
-
+        // remove user from facility
     }
 
 //TODO: Add listActualUsage() method
+    // get list of all usage types for each facility room
 
     public void calculateUsageRate() {
-
+        // total count of use of room
     }
 
     public void isInUseDuringInterval() {
