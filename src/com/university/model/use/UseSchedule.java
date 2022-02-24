@@ -16,7 +16,7 @@ public class UseSchedule {
     private int availableCapacity;
     private boolean atCapacity;
     private int usage;
-    private List<FacilityRoom> facilityDetails = new ArrayList<>();
+    private List<FacilityRoom> facilityRooms = new ArrayList<>();
 
     // TODO Pass in occupancy from FacilityRoom
 
@@ -25,30 +25,40 @@ public class UseSchedule {
         return inUse;
     }
 
+    public void setInUse(boolean inUse) {
+        this.inUse = inUse;
+    }
+
     public boolean isAtCapacity() {
             return atCapacity;
     }
 
+    public void setAtCapacity(boolean atCapacity) {
+        this.atCapacity = atCapacity;
+    }
+
     public int requestAvailableCapacity(FacilityRoom capacity, int occupancy) {
-        // return capacity - occupancy
-        availableCapacity = capacity.getCapacity() - occupancy;
-        return availableCapacity;
+        return availableCapacity = capacity.getCapacity() - occupancy;
     }
 
-    public List<FacilityRoom> getFacilityDetails() {
-        return facilityDetails;
+    public List<FacilityRoom> getFacilityRooms() {
+        return facilityRooms;
     }
 
-    public void setFacilityDetails(List<FacilityRoom> facilityDetails) {
-        this.facilityDetails = facilityDetails;
+    public void setFacilityRooms(List<FacilityRoom> facilityRooms) {
+        this.facilityRooms = facilityRooms;
     }
 
-    public void addFacilityDetail(FacilityRoom facilityDetail) {
-        facilityDetails.add(facilityDetail);
+    public void addFacilityDetail(FacilityRoom facilityRoom) {
+        facilityRooms.add(facilityRoom);
     }
 
     public int getUsage() {
         return usage;
+    }
+
+    public void setUsage(int usage) {
+        this.usage = usage;
     }
 
     public void assignFacilityToUse() {
