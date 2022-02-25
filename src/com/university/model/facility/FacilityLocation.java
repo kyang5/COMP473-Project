@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class FacilityLocation {
+    private int facilityId;
     private String name;
     private int addressNumber;
     private String streetName;
@@ -13,6 +14,14 @@ public class FacilityLocation {
     private int capacity;
     private FacilityManager facilityManager;
     private List<FacilityLocation> listFacilities = new ArrayList<>();
+
+    public int getFacilityId() {
+        return facilityId;
+    }
+
+    public void setFacilityId(int facilityId) {
+        this.facilityId = facilityId;
+    }
 
     public String getName() {
         return name;
