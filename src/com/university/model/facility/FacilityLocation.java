@@ -2,7 +2,6 @@ package com.university.model.facility;
 
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class FacilityLocation {
     private int facilityId;
@@ -14,6 +13,7 @@ public class FacilityLocation {
     private int capacity;
     private FacilityManager facilityManager;
     private List<FacilityLocation> listFacilities = new ArrayList<>();
+    private List<FacilityRoom> listFacilityRooms = new ArrayList<>();
 
     public int getFacilityId() {
         return facilityId;
@@ -85,6 +85,22 @@ public class FacilityLocation {
 
     public void removeFacilityLocation (FacilityLocation facilityLocation) {
         listFacilities.remove(facilityLocation);
+    }
+
+    public List<FacilityRoom> getListFacilityRooms() {
+        return listFacilityRooms;
+    }
+
+    public void setListFacilityRooms(List<FacilityRoom> listFacilityRooms) {
+        this.listFacilityRooms = listFacilityRooms;
+    }
+
+    public void addFacilityRoom (FacilityRoom facilityRoom) {
+        listFacilityRooms.add(facilityRoom);
+    }
+
+    public void removeFacilityRoom(FacilityRoom facilityRoom) {
+        listFacilityRooms.remove(facilityRoom);
     }
 
     public FacilityManager getFacilityManager() {
