@@ -1,6 +1,6 @@
 package com.university.model.facility;
 
-public class FacilityRoom extends FacilityLocation {
+public class FacilityRoom {
     private int phoneNumber;
     private int facilityRoomId;
     private int roomNumber;
