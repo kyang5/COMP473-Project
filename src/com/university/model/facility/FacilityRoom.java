@@ -2,7 +2,7 @@ package com.university.model.facility;
 
 public class FacilityRoom extends FacilityLocation {
     private int phoneNumber;
-    private int facilityId;
+    private int facilityRoomId;
     private int roomNumber;
 
     public int getPhoneNumber() {
@@ -13,12 +13,12 @@ public class FacilityRoom extends FacilityLocation {
         this.phoneNumber = phoneNumber;
     }
 
-    public int getFacilityId() {
-        return facilityId;
+    public int getFacilityRoomId() {
+        return facilityRoomId;
     }
 
-    public void setFacilityId(int facilityId) {
-        this.facilityId = facilityId;
+    public void setFacilityRoomId(int facilityId) {
+        this.facilityRoomId = facilityId;
     }
 
     public int getRoomNumber() {
