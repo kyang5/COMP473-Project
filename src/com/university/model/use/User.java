@@ -1,11 +1,14 @@
 package com.university.model.use;
 
+import com.university.model.facility.FacilityRoom;
+
 public class User {
 
     private String userFirstName;
     private String userLastName;
     private int userId;
     private String userTitle;
+    private FacilityRoom facilityRoom;
 
     public String getUserFirstName() {
         return userFirstName;
@@ -37,5 +40,13 @@ public class User {
 
     public void setUserTitle(String userTitle) {
         this.userTitle = userTitle;
+    }
+
+    public FacilityRoom getFacilityRoom() {
+        return facilityRoom;
+    }
+
+    public void setFacilityRoom(FacilityRoom facilityRoom) {
+        this.facilityRoom = facilityRoom;
     }
 }
