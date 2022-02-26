@@ -5,6 +5,8 @@ public class FacilityRoom {
     private int facilityRoomId;
     private int roomNumber;
     private int capacity;
+    private FacilityLocation facilityLocation;
+    private boolean inUse;
 
     public int getPhoneNumber() {
         return phoneNumber;
@@ -36,5 +38,21 @@ public class FacilityRoom {
 
     public void setCapacity(int capacity) {
         this.capacity = capacity;
+    }
+
+    public FacilityLocation getFacilityLocation() {
+        return facilityLocation;
+    }
+
+    public void setFacilityLocation(FacilityLocation facilityLocation) {
+        this.facilityLocation = facilityLocation;
+    }
+
+    public boolean isInUse() {
+        return inUse;
+    }
+
+    public void setInUse(boolean inUse) {
+        this.inUse = inUse;
     }
 }
