@@ -1,8 +1,6 @@
 package com.university.model.use;
 
-// TODO: Add useStartTime, useEndTime, useStartDate, and UseEndDate attributes
-//TODO: check to see if we need to add useLog and/or change it to listactual usage.
-
+import com.university.model.facility.FacilityLocation;
 import com.university.model.facility.FacilityRoom;
 
 import java.util.*;
@@ -12,24 +10,21 @@ public class UseSchedule {
     private int availableCapacity;
     private int occupancy;
     private boolean atCapacity;
-    private int usage;
+    private double usageRate;
     private List<FacilityRoom> facilityRooms = new ArrayList<>();
-    private Time useStartTime;
-    private Time useEndTime;
+    // date and time entered at the same time in same variable
     private Date useStartDate;
     private Date useEndDate;
     private List<Type> listActualUsage = new ArrayList<>();
+    private List<User> listUsers = new ArrayList<>();
 
-    public boolean isInUse() {
-        return inUse;
-    }
-
-    public void setInUse(boolean inUse) {
-        this.inUse = inUse;
-    }
 
     public boolean isAtCapacity() {
         return atCapacity;
+    }
+
+    public void setAtCapacity(boolean atCapacity) {
+        this.atCapacity = atCapacity;
     }
 
     public int getOccupancy() {
@@ -40,8 +35,9 @@ public class UseSchedule {
         this.occupancy = occupancy;
     }
 
-    public int requestAvailableCapacity(FacilityRoom capacity) {
-        return availableCapacity = capacity.getCapacity() - occupancy;
+    public int requestAvailableCapacity(FacilityRoom room) {
+        availableCapacity = room.getCapacity() - occupancy;
+        return availableCapacity;
     }
 
     // get list of facility rooms
@@ -58,28 +54,21 @@ public class UseSchedule {
         facilityRooms.add(facilityRoom);
     }
 
-    public int getUsage() {
-        return usage;
+    public List<User> getListUsers() {
+        return listUsers;
     }
 
-    public void setUsage(int usage) {
-        this.usage = usage;
+    public void setListUsers(List<User> listUsers) {
+        this.listUsers = listUsers;
     }
 
-    // TODO complete method
-    public void assignFacilityRoomToUse(FacilityRoom facilityRoom) {
-        // add a facility room usage type to list of actual usage type
-
+    public void addUser(User user) {
+        listUsers.add(user);
     }
 
-    // TODO create list of users
-
-    // TODO add method to add User
-
-    // TODO complete method
     public void vacateFacilityRoom(User user) {
         // remove user from facility room
-
+        listUsers.remove(user);
     }
 
     public List<Type> getListActualUsage() {
@@ -94,9 +83,17 @@ public class UseSchedule {
         listActualUsage.add(facilityUseType);
     }
 
-    // TODO complete method
-    public void calculateUsageRate() {
-        // total count of use of room
+    public void calculateUsage() {
+        // total number of rooms in a facility out of total number of rooms in a facility being used
+        double totalRoomsInUse = 0.0;
+        double totalRooms = 0;
+        for(FacilityRoom facilityRoom: facilityRooms) {
+            totalRooms += 1;
+            if (facilityRoom.isInUse()) {
+                totalRoomsInUse += 1;
+            }
+        }
+        usageRate = totalRoomsInUse / totalRooms;
     }
 
     public Date getUseStartDate() {
@@ -115,36 +112,10 @@ public class UseSchedule {
         this.useEndDate = useEndDate;
     }
 
-    public Time getUseStartTime() {
-        return useStartTime;
-    }
-
-    public void setUseStartTime(Time useStartTime) {
-        this.useStartTime = useStartTime;
-    }
-
-    public Time getUseEndTime() {
-        return useEndTime;
-    }
-
-    public void setUseEndTime(Time useEndTime) {
-        this.useEndTime = useEndTime;
-    }
-
-    // TODO complete method
     public void isInUseDuringTimeInterval() {
-        //useStartTime, useEndTime
+        long end = useEndDate.getTime();
+        long start = useStartDate.getTime();
+        long duration = end - start; //time duration in milliseconds
     }
-
-    public void setInUseDuringTimeInterval() {
-
-    }
-
-    // TODO add method to calculate use start date and end date
-     public void isInUseDuringDateInterval() {
-        // useStartDate, useEndDate
-     }
-
-
 
 }
