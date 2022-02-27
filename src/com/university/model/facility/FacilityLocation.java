@@ -13,6 +13,7 @@ public class FacilityLocation {
     private FacilityManager facilityManager;
     private List<FacilityLocation> listFacilities = new ArrayList<>();
     private List<FacilityRoom> listFacilityRooms = new ArrayList<>();
+    private FacilityRoom facilityRoom;
 
     public int getFacilityId() {
         return facilityId;
@@ -102,4 +103,11 @@ public class FacilityLocation {
         this.facilityManager = facilityManager;
     }
 
+    public FacilityRoom getFacilityRoom() {
+        return facilityRoom;
+    }
+
+    public void setFacilityRoom(FacilityRoom facilityRoom) {
+        this.facilityRoom = facilityRoom;
+    }
 }
