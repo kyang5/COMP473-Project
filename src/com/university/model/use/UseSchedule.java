@@ -1,12 +1,10 @@
 package com.university.model.use;
 
-import com.university.model.facility.FacilityLocation;
 import com.university.model.facility.FacilityRoom;
 
 import java.util.*;
 
 public class UseSchedule {
-    private boolean inUse;
     private int availableCapacity;
     private int occupancy;
     private boolean atCapacity;
@@ -83,7 +81,11 @@ public class UseSchedule {
         listActualUsage.add(facilityUseType);
     }
 
-    public void calculateUsage() {
+    public void removeActualUsage(Type facilityUseType) {
+        listActualUsage.remove(facilityUseType);
+    }
+
+    public double calculateUsage() {
         // total number of rooms in a facility out of total number of rooms in a facility being used
         double totalRoomsInUse = 0.0;
         double totalRooms = 0;
@@ -94,6 +96,7 @@ public class UseSchedule {
             }
         }
         usageRate = totalRoomsInUse / totalRooms;
+        return usageRate;
     }
 
     public Date getUseStartDate() {
@@ -112,7 +115,7 @@ public class UseSchedule {
         this.useEndDate = useEndDate;
     }
 
-    public void isInUseDuringTimeInterval() {
+    public void timeInterval() {
         long end = useEndDate.getTime();
         long start = useStartDate.getTime();
         long duration = end - start; //time duration in milliseconds
