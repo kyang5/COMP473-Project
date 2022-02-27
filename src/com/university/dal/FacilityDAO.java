@@ -24,12 +24,12 @@ public class FacilityDAO {
             //Get facility location
             FacilityLocation facilityLocation = new FacilityLocation();
             while (facilityLocationRS.next()) {
-                facilityLocation.setFacilityId(facilityLocationRS.getString("facilityID"));
+                facilityLocation.setFacilityId(facilityLocationRS.getInt("facilityID"));
                 facilityLocation.setName(facilityLocationRS.getString("name"));
-                facilityLocation.setAddressNumber(facilityLocationRS.getString("addressNumber"));
+                facilityLocation.setAddressNumber(facilityLocationRS.getInt("addressNumber"));
                 facilityLocation.setStreetName(facilityLocationRS.getString("streetName"));
                 facilityLocation.setCity(facilityLocationRS.getString("city"));
-                facilityLocation.setZipcode(facilityLocationRS.getString("zipcode"));
+                facilityLocation.setZipcode(facilityLocationRS.getInt("zipcode"));
 
             }
             //close to manage resources
@@ -43,7 +43,7 @@ public class FacilityDAO {
             System.out.println("FacilityDAO: *************** Query " + selectFacilityManagerQuery);
 
             while (facilityManagerRS.next()) {
-                manager.setManagerId(facilityManagerRS.getString("managerID"));
+                manager.setManagerId(facilityManagerRS.getInt("managerID"));
                 manager.setManagerFirstName(facilityManagerRS.getString("managerFirstName"));
                 manager.setManagerLastName(facilityManagerRS.getString("managerLastName"));
             }
@@ -71,19 +71,19 @@ public class FacilityDAO {
             //Insert the facilityLocation object
             String facilityLocationStm = "INSERT INTO FacilityLocation(facilityID, name, addressName, streetName, city, zipcode) VALUES(?, ?, ?, ?, ?, ?)";
             facilityLocationPst = con.prepareStatement(facilityLocationStm);
-            facilityLocationPst.setString(1, facilityLocation.getFacilityId());
+            facilityLocationPst.setInt(1, facilityLocation.getFacilityId());
             facilityLocationPst.setString(2, facilityLocation.getName());
-            facilityLocationPst.setString(3, facilityLocation.getAddressNumber());
+            facilityLocationPst.setInt(3, facilityLocation.getAddressNumber());
             facilityLocationPst.setString(4, facilityLocation.getStreetName());
             facilityLocationPst.setString(5, facilityLocation.getCity());
-            facilityLocationPst.setString(6, facilityLocation.getZipcode());
+            facilityLocationPst.setInt(6, facilityLocation.getZipcode());
             facilityLocationPst.executeUpdate();
 
             //Insert facility manager object
             String managerStm = "INSERT INTO FacilityManager(facilityID, managerID, managerFirstName, managerLastName) VALUES(?, ?, ?, ?)";
             managerPst = con.prepareStatement(managerStm);
-            managerPst.setString(1, facilityLocation.getFacilityId());
-            managerPst.setString(2, facilityLocation.getFacilityManager().getManagerId());
+            managerPst.setInt(1, facilityLocation.getFacilityId());
+            managerPst.setInt(2, facilityLocation.getFacilityManager().getManagerId());
             managerPst.setString(3, facilityLocation.getFacilityManager().getManagerFirstName());
             managerPst.setString(4, facilityLocation.getFacilityManager().getManagerLastName());
             managerPst.executeUpdate();
@@ -105,14 +105,6 @@ public class FacilityDAO {
         }
     }
 
-    private int phoneNumber;
-    private int facilityRoomId;
-    private int roomNumber;
-    private int capacity;
-    private FacilityLocation facilityLocation;
-    private boolean inUse;
-
-
     public FacilityRoom getFacilityRoom(String facilityRoomId) {
 
         try {
@@ -126,10 +118,10 @@ public class FacilityDAO {
             //Get FacilityRoom
             FacilityRoom facilityRoom = new FacilityRoom();
             while (facilityRoomRS.next()) {
-                facilityRoom.setFacilityRoomId(facilityRoomRS.getString("facilityRoomID"));
-                facilityRoom.setPhoneNumber(facilityRoomRS.getString("phonenNumber"));
-                facilityRoom.setRoomNumber(facilityRoomRS.getString("roomNumber"));
-                facilityRoom.setCapacity(facilityRoomRS.getString("capacity"));
+                facilityRoom.setFacilityRoomId(facilityRoomRS.getInt("facilityRoomID"));
+                facilityRoom.setPhoneNumber(facilityRoomRS.getInt("phonenNumber"));
+                facilityRoom.setRoomNumber(facilityRoomRS.getInt("roomNumber"));
+                facilityRoom.setCapacity(facilityRoomRS.getInt("capacity"));
             }
 
             facilityRoomRS.close();
@@ -142,19 +134,25 @@ public class FacilityDAO {
             System.out.println("FacilityDAO:  *************** Query " + selectFacilityLocationQuery);
 
             while (facilityLocationRS.next()) {
-                facilityLocation.setFacilityId(facilityLocationRS.getString("facilityLocationID"));
+                facilityLocation.setFacilityId(facilityLocationRS.getInt("facilityLocationID"));
                 facilityLocation.setName(facilityLocationRS.getString("name"));
-                facilityLocation.setAddressNumber(facilityLocationRS.getString("addressNumber"));
+                facilityLocation.setAddressNumber(facilityLocationRS.getInt("addressNumber"));
                 facilityLocation.setStreetName(facilityLocationRS.getString("streetName"));
                 facilityLocation.setCity(facilityLocationRS.getString("city"));
-                facilityLocation.setZipcode(facilityLocationRS.getString("zipcode"));
+                facilityLocation.setZipcode(facilityLocationRS.getInt("zipcode"));
             }
 
             facilityLocationRS.close();
             st.close();
 
             return facilityRoom;
+        } catch (SQLException se) {
+            System.err.println("FacilityDAO: Threw a SQLException retrieving the facility room object.");
+            System.err.println(se.getMessage());
+            se.printStackTrace();
         }
+
+        return null;
     }
 
     public void addFacilityRoom(FacilityRoom facilityRoom) {
@@ -166,22 +164,22 @@ public class FacilityDAO {
             //Insert facility room object
             String facilityRoomStm = "INSERT INTO FacilityRoom(facilityRoomID, phoneNumber, roomNumber, capacity) VALUES(?, ?, ?, ?)";
             facilityRoomPst = con.prepareStatement(facilityRoomStm);
-            facilityRoomPst.setString(1, facilityRoom.getFacilityRoomId());
-            facilityRoomPst.setString(2, facilityRoom.getPhoneNumber());
-            facilityRoomPst.setString(3, facilityRoom.getRoomNumber());
-            facilityRoomPst.setString(4, facilityRoom.getCapacity());
+            facilityRoomPst.setInt(1, facilityRoom.getFacilityRoomId());
+            facilityRoomPst.setInt(2, facilityRoom.getPhoneNumber());
+            facilityRoomPst.setInt(3, facilityRoom.getRoomNumber());
+            facilityRoomPst.setInt(4, facilityRoom.getCapacity());
             facilityRoomPst.executeUpdate();
 
             //Insert facility location object
             String facilityLocationStm = "INSERT INTO FacilityLocation(facilityRoomID, facilityID, name, addressNumber, streetName, city, zipcode) VALUES (?, ?, ?, ?, ?, ?, ?)";
             facilityLocationPst = con.prepareStatement(facilityLocationStm);
-            facilityLocationPst.setString(1, facilityRoom.getFacilityRoomId());
-            facilityLocationPst.setString(2, facilityRoom.getFacilityLocation().getFacilityId());
+            facilityLocationPst.setInt(1, facilityRoom.getFacilityRoomId());
+            facilityLocationPst.setInt(2, facilityRoom.getFacilityLocation().getFacilityId());
             facilityLocationPst.setString(3, facilityRoom.getFacilityLocation().getName());
-            facilityLocationPst.setString(4, facilityRoom.getFacilityLocation().getAddressNumber());
+            facilityLocationPst.setInt(4, facilityRoom.getFacilityLocation().getAddressNumber());
             facilityLocationPst.setString(5, facilityRoom.getFacilityLocation().getStreetName());
             facilityLocationPst.setString(6, facilityRoom.getFacilityLocation().getCity());
-            facilityLocationPst.setString(7, facilityRoom.getFacilityLocation().getZipcode());
+            facilityLocationPst.setInt(7, facilityRoom.getFacilityLocation().getZipcode());
             facilityLocationPst.executeUpdate();
         } catch (SQLException ex) {
 

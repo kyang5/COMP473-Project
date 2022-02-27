@@ -35,7 +35,7 @@ public class UseDAO {
             //Get facility room
             String selectFacilityRoomQuery = "SELECT facilityRoomID, phoneNumber, roomNumber, capacity FROM FacilityRoom WHERE userID = '" + userId + "'";
             ResultSet facilityRoomRS = st.executeQuery(selectFacilityRoomQuery);
-            FacilityRoom facilityRoom = new FacilityRoom;
+            FacilityRoom facilityRoom = new FacilityRoom();
 
             System.out.println("UserDAO: *************** Query " + selectFacilityRoomQuery);
 
@@ -107,19 +107,18 @@ public class UseDAO {
 
             ResultSet facilityUseTypeRS = st.executeQuery(selectFacilityUseTypeQuery);
             System.out.println("UseDAO: *************** Query " + selectFacilityUseTypeQuery);
-
-
-            User user = new User();
             Type facilityUseType = new Type();
-            while(facilityUseType.next()) {
-                facilityUseType.setFacilityUseType(facilityUseTypeRS.getString("facilityUseType"));
+
+            //TODO check error
+            while(facilityUseTypeRS.next()) {
+                facilityUseType.setFacilityType(facilityUseTypeRS.getString("facilityUseType"));
             }
             facilityUseTypeRS.close();
 
             //Get facility room
-            String selectFacilityRoomQuery = "SELECT facilityRoomID, phoneNumber, roomNumber, capacity FROM FacilityRoom WHERE userID = '" + facilityUseType + "'";
+            String selectFacilityRoomQuery = "SELECT facilityRoomID, phoneNumber, roomNumber, capacity, inUse FROM FacilityRoom WHERE userID = '" + facilityUseType + "'";
             ResultSet facilityRoomRS = st.executeQuery(selectFacilityRoomQuery);
-            FacilityRoom facilityRoom = new FacilityRoom;
+            FacilityRoom facilityRoom = new FacilityRoom();
 
             System.out.println("UserDAO: *************** Query " + selectFacilityRoomQuery);
 
@@ -128,6 +127,7 @@ public class UseDAO {
                 facilityRoom.setPhoneNumber(facilityRoomRS.getInt("phoneNumber"));
                 facilityRoom.setRoomNumber(facilityRoomRS.getInt("roomNumber"));
                 facilityRoom.setCapacity(facilityRoomRS.getInt("capacity"));
+                facilityRoom.setInUse(facilityRoomRS.getBoolean("inUse"));
             }
             facilityRoomRS.close();
             st.close();
@@ -153,7 +153,7 @@ public class UseDAO {
             facilityUseTypePst.setString(1, facilityUseType.getFacilityUseType());
             facilityUseTypePst.executeUpdate();
 
-            String facilityRoomStm = "INSERT INTO FacilityRoom(facilityUseType, facilityRoomID, phoneNumber, roomNumber, capacity) VALUES(?, ?, ?, ?, ?)";
+            String facilityRoomStm = "INSERT INTO FacilityRoom(facilityUseType, facilityRoomID, phoneNumber, roomNumber, capacity, inUse) VALUES(?, ?, ?, ?, ?, ?)";
             facilityRoomPst = con.prepareStatement(facilityRoomStm);
             facilityRoomPst.setString(1, facilityUseType.getFacilityUseType());
             facilityRoomPst.setInt(2, facilityUseType.getFacilityRoom().getFacilityRoomId());
