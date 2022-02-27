@@ -4,9 +4,6 @@ import com.university.model.facility.FacilityManager;
 
 public class Inspector {
     //Variables for information about the inspector
-    //TODO Consider giving the Strings unique identifier names
-    //TODO check with whether or not the variables need to be private
-    //TODO check the naming schemas of the parameters
     private String firstName;
     private String lastName;
     private int inspectorID;
