@@ -10,7 +10,6 @@ public class FacilityLocation {
     private String streetName;
     private String city;
     private int zipcode;
-    private int capacity;
     private FacilityManager facilityManager;
     private List<FacilityLocation> listFacilities = new ArrayList<>();
     private List<FacilityRoom> listFacilityRooms = new ArrayList<>();
@@ -61,14 +60,6 @@ public class FacilityLocation {
 
     public void setZipcode(int zipcode) {
         this.zipcode = zipcode;
-    }
-
-    public int getCapacity() {
-        return capacity;
-    }
-
-    public void setCapacity(int capacity) {
-        this.capacity = capacity;
     }
 
     public List<FacilityLocation> getListFacilities() {
