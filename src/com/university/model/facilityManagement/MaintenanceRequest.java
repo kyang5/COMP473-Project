@@ -1,6 +1,6 @@
 package com.university.model.facilityManagement;
 import java.util.*;
-
+//TODO get and set for facilityRoom
 public class MaintenanceRequest {
     private String requestType;
     private int requestID;

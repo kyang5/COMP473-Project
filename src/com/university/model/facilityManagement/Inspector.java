@@ -1,5 +1,7 @@
 package com.university.model.facilityManagement;
 
+import com.university.model.facility.FacilityManager;
+
 public class Inspector {
     //Variables for information about the inspector
     //TODO Consider giving the Strings unique identifier names
@@ -10,38 +12,44 @@ public class Inspector {
     private int inspectorID;
     private String title;
 
-    public String getInspectorFirstName(){
+    public String getInspectorFirstName() {
         return firstName;
 
     }
-    public String getInspectorLastName(){
+
+    public String getInspectorLastName() {
         return lastName;
 
     }
-    public int getInspectorID(){
+
+    public int getInspectorID() {
         return inspectorID;
 
     }
-    public String getInspectorTitle(){
+
+    public String getInspectorTitle() {
         return title;
 
     }
-    public void setInspectorFirstName(String firstName){
+
+    public void setInspectorFirstName(String firstName) {
         this.firstName = firstName;
 
 
     }
-    public void setInspectorLastName(String lastName){
+
+    public void setInspectorLastName(String lastName) {
         this.lastName = lastName;
 
     }
-    public void setInspectorID(int inspectorID){
+
+    public void setInspectorID(int inspectorID) {
         this.inspectorID = inspectorID;
 
     }
-    public void setInspectorTitle(String title){
+
+    public void setInspectorTitle(String title) {
         this.title = title;
 
     }
-
 }

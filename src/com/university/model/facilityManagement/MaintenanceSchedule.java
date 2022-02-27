@@ -5,6 +5,7 @@ import java.util.*;
 public class MaintenanceSchedule {
     private Date maintenanceDate;
     private Time maintenanceTime;
+
     public Date getMaintenanceDate(){
         return maintenanceDate;
     }

@@ -1,12 +1,25 @@
 package com.university.model.facilityManagement;
+import com.university.model.facility.FacilityLocation;
+
 import java.util.*;
+//TODO write get and set method for facility.
 public class MaintenanceOrder {
     private String orderType;
     private int orderID;
     private Date orderDate;
     private Time orderTime;
+    private double cost;
+    public FacilityLocation facilityLocation;
+//product location
+    //quantity maintenance orders list
+    public double getCost(){
+        return cost;
+    }
+    public void setCost(){
+        this.cost = cost;
+    }
 
-    public String getOrderType(){
+    public String getOrderType() {
         return orderType;
     }
     public int getOrderID(){
