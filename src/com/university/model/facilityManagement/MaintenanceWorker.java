@@ -1,5 +1,5 @@
 package com.university.model.facilityManagement;
-//TODO Make the variable names unique.
+
 public class MaintenanceWorker {
     private String firstName;
     private String lastName;

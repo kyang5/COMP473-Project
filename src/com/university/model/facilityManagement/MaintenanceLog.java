@@ -1,67 +1,83 @@
 package com.university.model.facilityManagement;
 
+import com.university.model.facility.FacilityLocation;
 import com.university.model.facility.FacilityRoom;
 import java.util.*;
 //TODO address some questions about the list and calculations
+//TODO update documentation and UML Diagram for Objects and Lists.
 public class MaintenanceLog {
     private double cost;
     private Date downTime;
-    private List<FacilityRoom> facilityList = new ArrayList<FacilityRoom>();
+    private int inspectionLog;
     private List<MaintenanceOrder> maintenanceList = new ArrayList<MaintenanceOrder>();
-    private List<MaintenanceWorker> workerList = new ArrayList<>();
+    private List<MaintenanceSchedule> scheduleList = new ArrayList<>();
     private List<MaintenanceRequest> requestList = new ArrayList<>();
-    private FacilityRoom facilityRoom;
-    private MaintenanceOrder maintenanceOrder;
-    private MaintenanceWorker maintenanceWorker;
-    private MaintenanceRequest maintenanceRequest;
+    private List<Inspection> inspectionList = new ArrayList<>();
+    //private MaintenanceOrder maintenanceOrder;
+    //private MaintenanceWorker maintenanceWorker;
+    //private MaintenanceRequest maintenanceRequest;
+    //private FacilityRoom facilityRoom;
+    public int getInspectionLog() {
 
-    public FacilityRoom getFacilityRoom(){
-        return facilityRoom;
-    }
-    public void setFacilityRoom(FacilityRoom facilityRoom){
-        this.facilityRoom = facilityRoom;
+        inspectionLog = inspectionList.size();
 
+        return inspectionLog;
     }
-    public MaintenanceOrder getMaintenanceOrder(){
-        return maintenanceOrder;
-    }
-    public void setMaintenanceOrder(MaintenanceOrder maintenanceOrder){
-        this.maintenanceOrder = maintenanceOrder;
-    }
-    public MaintenanceWorker getMaintenanceWorker(){
-        return maintenanceWorker;
-    }
-    public void setMaintenanceWorker(MaintenanceWorker maintenanceWorker) {
-        this.maintenanceWorker = maintenanceWorker;
-    }
-    public MaintenanceRequest getMaintenanceRequest(){
-        return maintenanceRequest;
-    }
-    public void setMaintenanceWorker(MaintenanceRequest maintenanceRequest) {
-        this.maintenanceRequest = maintenanceRequest;
-    }
-    public List<FacilityRoom> getFacilityList() {
-        return facilityList;
+    public List<Inspection> getInspectionList() {
+        return inspectionList;
     }
 
-    public void setFacilityList(List<FacilityRoom> facilityList) {
-        this.facilityList = facilityList;
+    public void setInspectionList(List<Inspection> inspectionList){
+        this.inspectionList = inspectionList;
     }
-    public List<MaintenanceOrder> getMaintenanceList() {
+    public void addInspection(Inspection inspection){
+        inspectionList.add(inspection);
+    }
+    public void removeInspection(Inspection inspection){
+        inspectionList.remove(inspection);
+    }
+
+    public void addMaintenanceRequest(MaintenanceRequest maintenanceRequest){
+        requestList.add(maintenanceRequest);
+    }
+    public void cancelMaintenanceRequest(MaintenanceRequest maintenanceRequest){
+        requestList.remove(maintenanceRequest);
+    }
+    public void scheduleMaintenance(MaintenanceSchedule maintenanceSchedule){
+        scheduleList.add(maintenanceSchedule);
+    }
+    public void cancelSchedule(MaintenanceSchedule maintenanceSchedule){
+        scheduleList.remove(maintenanceSchedule);
+    }
+    public void addMaintenanceOrder(MaintenanceOrder maintenanceOrder){
+        maintenanceList.add(maintenanceOrder);
+    }
+    public void cancelMaintenanceOrder(MaintenanceOrder maintenanceOrder){
+        maintenanceList.remove(maintenanceOrder);
+    }
+    public List<MaintenanceOrder> getMaintenanceOrderList(){
         return maintenanceList;
     }
 
     public void setMaintenanceList(List<MaintenanceOrder> maintenanceList) {
         this.maintenanceList = maintenanceList;
     }
-    public List<MaintenanceWorker> getWorkerList() {
-        return workerList;
+    public List<MaintenanceSchedule> getScheduleList() {
+        return scheduleList;
     }
 
-    public void setWorkerList(List<MaintenanceWorker> workerList) {
-        this.workerList = workerList;
+    public List<MaintenanceSchedule> getMaintenanceScheduleList(){
+        return scheduleList;
+    }
+
+    public void setScheduleList(List<MaintenanceSchedule> scheduleList) {
+        this.scheduleList = scheduleList;
     }
     public List<MaintenanceRequest> getRequestList() {
+        return requestList;
+    }
+
+    public List<MaintenanceRequest> getMaintenanceRequestList(){
         return requestList;
     }
 
@@ -72,7 +88,6 @@ public class MaintenanceLog {
         return cost;
     }
     public Date getDownTime(){
-        //TODO check to see if this needs to be public void
         return downTime;
     }
     public void setCost(int cost){
@@ -82,11 +97,16 @@ public class MaintenanceLog {
     public void setDownTime(Date downTime){
         this.downTime = downTime;
     }
-    public double calcMaintenanceCostForFacility(){
+    public double calcMaintenanceCostForFacility(FacilityLocation facilityLocation){
         //TODO enter the method for the calculations
         //TODO check orderdetail order and product as a frame of reference for bookstore
-        double total = 0.0;
-        for (MaintenanceRequest totalSum : maintenanceList) {
+        double totalCost = 0.0;
+        for (FacilityRoom room : facilityLocation.getListFacilityRooms().getRoomNumber()) {
+            for(MaintenanceOrder order: maintenanceList){
+                if(room==order.getFacilityRoom().getRoomNumber())
+                    totalCost+=order.getCost();
+                //facilityLocation.getListFacilityRooms()==
+            }
             total += totalSum.getProduct().getPrice() * totalSum.getQuantity();
         }
         return total;
@@ -94,29 +114,5 @@ public class MaintenanceLog {
     public void calcDownTimeForFacility(){
         //TODO enter the method. Decide whether we need Time or Date as the value
     }
-    public void listMaintenance(){
-        //TODO decide on the return value and calculations etc.
-        //TODO write arraylist of maintencance list and details
-    }
-    public void addMaintOrder(){
-        //TODO add values from MaintOrder
 
-    }
-    public void addMaintWorker(){
-
-    }
-    public void removeMaintWorker(){
-        //TODO add values for MaintWorker
-    }
-    public void addMaintRequest(){
-        //TODO add values for addMaintRequest
-    }
-    public void addMaintSchedule(){
-        //TODO add values for addMaintSchedule
-    }
-    public void addInspection(Inspection addInspection){
-        addInspections.add(addInspection);
-        //Make it a Inspection list?
-        //add to maintenance.
-    }
 }
