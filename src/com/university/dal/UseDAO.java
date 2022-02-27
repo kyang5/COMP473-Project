@@ -16,7 +16,7 @@ public class UseDAO {
 
         try {
             //Get user
-            Statement st = DbHelper.getConnection().createStatement();
+            Statement st = DBHelper.getConnection().createStatement();
             String selectUserQuery = "SELECT userID, userFirstName, userLastName, userTitle FROM User WHERE userId = '" + userId + "'";
 
             ResultSet userRS = st.executeQuery(selectUserQuery);
@@ -102,7 +102,7 @@ public class UseDAO {
     public Type getFacilityUseType(String facilityUseType) {
 
         try {
-            Statement st = DbHelper.getConnection().createStatement();
+            Statement st = DBHelper.getConnection().createStatement();
             String selectFacilityUseTypeQuery = "SELECT facilityUseType FROM Type WHERE facilityUseType = '" + facilityUseType + "'";
 
             ResultSet facilityUseTypeRS = st.executeQuery(selectFacilityUseTypeQuery);
