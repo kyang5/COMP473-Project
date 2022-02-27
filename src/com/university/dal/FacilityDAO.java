@@ -2,6 +2,7 @@ package com.university.dal;
 
 import com.university.model.facility.FacilityLocation;
 import com.university.model.facility.FacilityManager;
+import com.university.model.facility.FacilityRoom;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -52,16 +53,14 @@ public class FacilityDAO {
             st.close();
 
             return facilityLocation;
+        } catch (SQLException se) {
+            System.err.println("FacilityDAO: Threw a SQLException retrieving the facility location object.");
+            System.err.println(se.getMessage());
+            se.printStackTrace();
         }
 
-            catch (SQLException se) {
-                System.err.println("FacilityDAO: Threw a SQLException retrieving the facility location object.");
-                System.err.println(se.getMessage());
-                se.printStackTrace();
-            }
-
-            return null;
-        }
+        return null;
+    }
 
     public void addFacilityLocation(FacilityLocation facilityLocation) {
         Connection con = DBHelper.getConnection();
@@ -92,14 +91,111 @@ public class FacilityDAO {
 
         } finally {
             try {
-                if(managerPst != null) {
+                if (managerPst != null) {
                     managerPst.close();
                     facilityLocationPst.close();
-                } if (con != null) {
+                }
+                if (con != null) {
                     con.close();
                 }
             } catch (SQLException ex) {
                 System.err.println("FacilityDAO: Threw a SQLException saving the facility location object.");
+                System.err.println(ex.getMessage());
+            }
+        }
+    }
+
+    private int phoneNumber;
+    private int facilityRoomId;
+    private int roomNumber;
+    private int capacity;
+    private FacilityLocation facilityLocation;
+    private boolean inUse;
+
+
+    public FacilityRoom getFacilityRoom(String facilityRoomId) {
+
+        try {
+            //Get facilityRoom
+            Statement st = DBHelper.getConnection().createStatement();
+            String selectFacilityRoomQuery = "SELECT facilityRoomID, phoneNumber, roomNumber, capacity FROM FacilityRoom WHERE facilityRoomID = '" + facilityRoomId + "'";
+
+            ResultSet facilityRoomRS = st.executeQuery(selectFacilityRoomQuery);
+            System.out.println("FacilityDAO: *************** Query " + selectFacilityRoomQuery);
+
+            //Get FacilityRoom
+            FacilityRoom facilityRoom = new FacilityRoom();
+            while (facilityRoomRS.next()) {
+                facilityRoom.setFacilityRoomId(facilityRoomRS.getString("facilityRoomID"));
+                facilityRoom.setPhoneNumber(facilityRoomRS.getString("phonenNumber"));
+                facilityRoom.setRoomNumber(facilityRoomRS.getString("roomNumber"));
+                facilityRoom.setCapacity(facilityRoomRS.getString("capacity"));
+            }
+
+            facilityRoomRS.close();
+
+            //Get facilityLocation
+            String selectFacilityLocationQuery = "SELECT facilityID, name, addressNumber, streetName, city, zipcode FROM FacilityLocation WHERE roomID = '" + facilityId + "'";
+            ResultSet facilityLocationRS = st.executeQuery(selectFacilityLocationQuery);
+            FacilityLocation facilityLocation = new FacilityLocation();
+
+            System.out.println("FacilityDAO:  *************** Query " + selectFacilityLocationQuery);
+
+            while (facilityLocationRS.next()) {
+                facilityLocation.setFacilityId(facilityLocationRS.getString("facilityLocationID"));
+                facilityLocation.setName(facilityLocationRS.getString("name"));
+                facilityLocation.setAddressNumber(facilityLocationRS.getString("addressNumber"));
+                facilityLocation.setStreetName(facilityLocationRS.getString("streetName"));
+                facilityLocation.setCity(facilityLocationRS.getString("city"));
+                facilityLocation.setZipcode(facilityLocationRS.getString("zipcode"));
+            }
+
+            facilityLocationRS.close();
+            st.close();
+
+            return facilityRoom;
+        }
+    }
+
+    public void addFacilityRoom(FacilityRoom facilityRoom) {
+        Connection con = DBHelper.getConnection();
+        PreparedStatement facilityRoomPst = null;
+        PreparedStatement facilityLocationPst = null;
+
+        try {
+            //Insert facility room object
+            String facilityRoomStm = "INSERT INTO FacilityRoom(facilityRoomID, phoneNumber, roomNumber, capacity) VALUES(?, ?, ?, ?)";
+            facilityRoomPst = con.prepareStatement(facilityRoomStm);
+            facilityRoomPst.setString(1, facilityRoom.getFacilityRoomId());
+            facilityRoomPst.setString(2, facilityRoom.getPhoneNumber());
+            facilityRoomPst.setString(3, facilityRoom.getRoomNumber());
+            facilityRoomPst.setString(4, facilityRoom.getCapacity());
+            facilityRoomPst.executeUpdate();
+
+            //Insert facility location object
+            String facilityLocationStm = "INSERT INTO FacilityLocation(facilityRoomID, facilityID, name, addressNumber, streetName, city, zipcode) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            facilityLocationPst = con.prepareStatement(facilityLocationStm);
+            facilityLocationPst.setString(1, facilityRoom.getFacilityRoomId());
+            facilityLocationPst.setString(2, facilityRoom.getFacilityLocation().getFacilityId());
+            facilityLocationPst.setString(3, facilityRoom.getFacilityLocation().getName());
+            facilityLocationPst.setString(4, facilityRoom.getFacilityLocation().getAddressNumber());
+            facilityLocationPst.setString(5, facilityRoom.getFacilityLocation().getStreetName());
+            facilityLocationPst.setString(6, facilityRoom.getFacilityLocation().getCity());
+            facilityLocationPst.setString(7, facilityRoom.getFacilityLocation().getZipcode());
+            facilityLocationPst.executeUpdate();
+        } catch (SQLException ex) {
+
+        } finally {
+            try {
+                if (facilityLocationPst != null) {
+                    facilityLocationPst.close();
+                    facilityRoomPst.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException ex) {
+                System.err.println("FacilityDAO: Threw a SQLException saving the facility room object.");
                 System.err.println(ex.getMessage());
             }
         }
