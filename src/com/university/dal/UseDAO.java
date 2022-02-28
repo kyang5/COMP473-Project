@@ -107,11 +107,11 @@ public class UseDAO {
 
             ResultSet facilityUseTypeRS = st.executeQuery(selectFacilityUseTypeQuery);
             System.out.println("UseDAO: *************** Query " + selectFacilityUseTypeQuery);
-            Type facilityUseType = new Type();
+            Type type = new Type();
 
             //TODO check error
             while(facilityUseTypeRS.next()) {
-                facilityUseType.setFacilityType(facilityUseTypeRS.getString("facilityUseType"));
+                type.setFacilityUseType(facilityUseTypeRS.getString("facilityUseType"));
             }
             facilityUseTypeRS.close();
 
@@ -132,7 +132,7 @@ public class UseDAO {
             facilityRoomRS.close();
             st.close();
 
-            return facilityUseType;
+            return type;
         }
         catch (SQLException se) {
             System.err.println("UserDAO: Threw a SQLException retrieving the type object.");
