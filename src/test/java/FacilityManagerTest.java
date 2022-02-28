@@ -33,8 +33,8 @@ class FacilityManagerTest {
         facility.setStreetName("State Street");
         facility.setCity("Chicago");
         facility.setZipcode(123456);
-        locationList.addFacilityLocation(facility); // TODO resolve issue
-        assertEquals(facility, locationList.get(0).intValue());
+        locationList.add(facility); // TODO resolve issue
+        assertEquals(facility, locationList.contains(facility));
     }
 
     @Test
@@ -46,8 +46,8 @@ class FacilityManagerTest {
         facility.setStreetName("State Street");
         facility.setCity("Chicago");
         facility.setZipcode(123456);
-        locationList.addFacilityLocation(facility);
-        locationList.removeFacilityLocation(facility);
+        locationList.add(facility);
+        locationList.remove(facility);
         assertTrue(locationList.isEmpty());
     }
 }

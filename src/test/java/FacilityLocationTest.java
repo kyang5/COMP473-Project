@@ -90,7 +90,6 @@ class FacilityLocationTest {
         facilityRoom1.setCapacity(10);
         facilityRoom1.setInUse(true);
         facilityRoom1.setFacilityLocation(facility);
-        roomList.add(facilityRoom1);
         roomList.remove(facilityRoom1);
         assertTrue(roomList.isEmpty());
     }
