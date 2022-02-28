@@ -119,7 +119,7 @@ public class FacilityDAO {
             FacilityRoom facilityRoom = new FacilityRoom();
             while (facilityRoomRS.next()) {
                 facilityRoom.setFacilityRoomId(facilityRoomRS.getInt("facilityRoomID"));
-                facilityRoom.setPhoneNumber(facilityRoomRS.getInt("phonenNumber"));
+                facilityRoom.setPhoneNumber(facilityRoomRS.getInt("phoneNumber"));
                 facilityRoom.setRoomNumber(facilityRoomRS.getInt("roomNumber"));
                 facilityRoom.setCapacity(facilityRoomRS.getInt("capacity"));
             }
