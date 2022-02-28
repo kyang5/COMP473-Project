@@ -53,6 +53,7 @@ public class FacilityDAO {
             st.close();
 
             return facilityLocation;
+
         } catch (SQLException se) {
             System.err.println("FacilityDAO: Threw a SQLException retrieving the facility location object.");
             System.err.println(se.getMessage());

@@ -8,6 +8,8 @@ import com.university.model.use.Type;
 import com.university.model.use.UseSchedule;
 import com.university.model.use.User;
 
+import java.util.Date;
+
 public class FacilityClient {
     public static void main(String[] args) throws Exception{
 
@@ -59,7 +61,7 @@ public class FacilityClient {
         MaintenanceOrder order = new MaintenanceOrder();
         order.setOrderType("Urgent");
         order.setOrderID(1);
-        //order.setOrderDate(2021, 03, 10, 23, 45);
+        order.setOrderDate(new Date(2021, 03, 01, 16, 45));
         order.setCost(100.0);
         order.setFacilityRoom(facilityRoom1);
 
@@ -70,8 +72,8 @@ public class FacilityClient {
         worker.setMaintTitle("Senior Electrician");
 
         MaintenanceSchedule schedule = new MaintenanceSchedule();
-        //schedule.setMaintenanceEndDate();
-        //schedule.setMaintenanceStartDate();
+        schedule.setMaintenanceEndDate(new Date(2021, 02, 02, 8, 30));
+        schedule.setMaintenanceStartDate(new Date(2021, 01, 25, 9,56));
         schedule.setMaintenanceWorker(worker);
         schedule.setFacilityRoom(facilityRoom1);
 
@@ -97,8 +99,8 @@ public class FacilityClient {
         UseSchedule useSchedule = new UseSchedule();
         useSchedule.setOccupancy(10);
         useSchedule.requestAvailableCapacity(facilityRoom1);
-        //useSchedule.setUseStartDate();
-        //useSchedule.setUseEndDate();
+        useSchedule.setUseStartDate(new Date(2020, 12, 1, 13, 45));
+        useSchedule.setUseEndDate(new Date(2020, 12, 22, 10, 15));
         useSchedule.addFacilityRoom(facilityRoom1);
         useSchedule.addActualUsage(type);
         useSchedule.addUser(user);
