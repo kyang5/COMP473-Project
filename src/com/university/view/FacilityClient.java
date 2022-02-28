@@ -4,6 +4,9 @@ import com.university.model.facility.FacilityLocation;
 import com.university.model.facility.FacilityManager;
 import com.university.model.facility.FacilityRoom;
 import com.university.model.facilityManagement.*;
+import com.university.model.use.Type;
+import com.university.model.use.UseSchedule;
+import com.university.model.use.User;
 
 public class FacilityClient {
     public static void main(String[] args) throws Exception{
@@ -48,6 +51,9 @@ public class FacilityClient {
         request.setRequestType("Plumbing");
         request.setRequestID(1);
         request.setRequestorID(1);
+        request.setProblem("Leaking pipes");
+        request.setRequestStatus("Open");
+        request.setFacilityRoom(facilityRoom1);
 
 
         MaintenanceOrder order = new MaintenanceOrder();
@@ -57,13 +63,45 @@ public class FacilityClient {
         order.setCost(100.0);
         order.setFacilityRoom(facilityRoom1);
 
+        MaintenanceWorker worker = new MaintenanceWorker();
+        worker.setMaintWorkerID(1);
+        worker.setMaintFirstName("Bob");
+        worker.setMaintLastName("Bob");
+        worker.setMaintTitle("Senior Electrician");
+
+        MaintenanceSchedule schedule = new MaintenanceSchedule();
+        schedule.setMaintenanceEndDate();
+        schedule.setMaintenanceStartDate();
+        schedule.setMaintenanceWorker(worker);
+        schedule.setFacilityRoom(facilityRoom1);
+
         MaintenanceLog maintenanceLog = new MaintenanceLog();
         maintenanceLog.addInspection(inspection);
         maintenanceLog.addMaintenanceOrder(order);
-        maintenanceLog.addMaintenanceRequest();
+        maintenanceLog.addMaintenanceRequest(request);
+        maintenanceLog.scheduleMaintenance(schedule);
+        maintenanceLog.calcMaintenanceCostForFacility(facilityLocation);
+        maintenanceLog.calcDownTimeForFacilityRoom(facilityRoom1);
 
+        Type type = new Type();
+        type.setFacilityUseType("Lab");
+        type.setFacilityRoom(facilityRoom1);
 
+        User user = new User();
+        user.setUserFirstName("Bob");
+        user.setUserLastName("Tom");
+        user.setUserId(1);
+        user.setUserTitle("Professor");
+        user.setFacilityRoom(facilityRoom1);
 
+        UseSchedule useSchedule = new UseSchedule();
+        useSchedule.setOccupancy(10);
+        useSchedule.requestAvailableCapacity(facilityRoom1);
+        useSchedule.setUseStartDate();
+        useSchedule.setUseEndDate();
+        useSchedule.addFacilityRoom(facilityRoom1);
+        useSchedule.addActualUsage(type);
+        useSchedule.addUser(user);
 
 
     }
