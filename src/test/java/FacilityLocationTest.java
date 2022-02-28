@@ -36,8 +36,8 @@ class FacilityLocationTest {
         facility.setStreetName("State Street");
         facility.setCity("Chicago");
         facility.setZipcode(123456);
-        locationList.addFacilityLocation(facility); // TODO resolve issue
-        assertEquals(facility, locationList.get(0).intValue()); // TODO what would intValue() be replaced with
+        locationList.add(facility); // TODO resolve issue
+        assertEquals(facility, locationList.contains(facility)); // TODO what would intValue() be replaced with
     }
 
     @org.junit.jupiter.api.Test
@@ -49,8 +49,8 @@ class FacilityLocationTest {
         facility.setStreetName("State Street");
         facility.setCity("Chicago");
         facility.setZipcode(123456);
-        locationList.addFacilityLocation(facility);
-        locationList.removeFacilityLocation(facility);
+        locationList.add(facility);
+        locationList.remove(facility);
         assertTrue(locationList.isEmpty());
     }
 
@@ -70,8 +70,8 @@ class FacilityLocationTest {
         facilityRoom1.setCapacity(10);
         facilityRoom1.setInUse(true);
         facilityRoom1.setFacilityLocation(facility);
-        roomList.addFacilityRoom(facilityRoom1);
-        assertEquals(facilityRoom1, roomList.get(0).intValue());
+        roomList.add(facilityRoom1);
+        assertEquals(facilityRoom1, roomList.contains(facilityRoom1));
     }
 
     @org.junit.jupiter.api.Test
@@ -90,8 +90,8 @@ class FacilityLocationTest {
         facilityRoom1.setCapacity(10);
         facilityRoom1.setInUse(true);
         facilityRoom1.setFacilityLocation(facility);
-        roomList.addFacilityRoom(facilityRoom1);
-        roomList.removeFacilityRoom(facilityRoom1);
+        roomList.add(facilityRoom1);
+        roomList.remove(facilityRoom1);
         assertTrue(roomList.isEmpty());
     }
 }
