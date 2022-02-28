@@ -59,7 +59,7 @@ public class FacilityClient {
         MaintenanceOrder order = new MaintenanceOrder();
         order.setOrderType("Urgent");
         order.setOrderID(1);
-        order.setOrderDate(2021, 03, 10, 23, 45);
+        //order.setOrderDate(2021, 03, 10, 23, 45);
         order.setCost(100.0);
         order.setFacilityRoom(facilityRoom1);
 
@@ -70,8 +70,8 @@ public class FacilityClient {
         worker.setMaintTitle("Senior Electrician");
 
         MaintenanceSchedule schedule = new MaintenanceSchedule();
-        schedule.setMaintenanceEndDate();
-        schedule.setMaintenanceStartDate();
+        //schedule.setMaintenanceEndDate();
+        //schedule.setMaintenanceStartDate();
         schedule.setMaintenanceWorker(worker);
         schedule.setFacilityRoom(facilityRoom1);
 
@@ -97,8 +97,8 @@ public class FacilityClient {
         UseSchedule useSchedule = new UseSchedule();
         useSchedule.setOccupancy(10);
         useSchedule.requestAvailableCapacity(facilityRoom1);
-        useSchedule.setUseStartDate();
-        useSchedule.setUseEndDate();
+        //useSchedule.setUseStartDate();
+        //useSchedule.setUseEndDate();
         useSchedule.addFacilityRoom(facilityRoom1);
         useSchedule.addActualUsage(type);
         useSchedule.addUser(user);
