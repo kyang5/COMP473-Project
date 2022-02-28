@@ -36,6 +36,15 @@ public class FacilityClient {
         facilityRoom1.setFacilityLocation(facilityLocation);
         facilityLocation.addFacilityRoom(facilityRoom1);
 
+        FacilityRoom facilityRoom2 = new FacilityRoom();
+        facilityRoom1.setFacilityRoomId(2);
+        facilityRoom1.setPhoneNumber(123-456-7890);
+        facilityRoom1.setCapacity(9);
+        facilityRoom1.setInUse(false);
+        facilityRoom1.setFacilityLocation(facilityLocation);
+        facilityLocation.addFacilityRoom(facilityRoom2);
+        facilityLocation.getListFacilityRooms();
+
         Inspector inspector = new Inspector();
         inspector.setInspectorID(1);
         inspector.setInspectorFirstName("Dan");
@@ -48,6 +57,7 @@ public class FacilityClient {
         inspection.setInspector(inspector);
         inspection.setFacilityRoom(facilityRoom1);
         inspection.addInspector(inspector);
+        inspection.getInspectionList();
 
         MaintenanceRequest request = new MaintenanceRequest();
         request.setRequestType("Plumbing");
@@ -65,6 +75,13 @@ public class FacilityClient {
         order.setCost(100.0);
         order.setFacilityRoom(facilityRoom1);
 
+        MaintenanceOrder order2 = new MaintenanceOrder();
+        order2.setOrderType("Urgent");
+        order2.setOrderID(2);
+        order2.setOrderDate(new Date(2021, 04, 01, 16, 45));
+        order2.setCost(50.0);
+        order2.setFacilityRoom(facilityRoom2);
+
         MaintenanceWorker worker = new MaintenanceWorker();
         worker.setMaintWorkerID(1);
         worker.setMaintFirstName("Bob");
@@ -80,10 +97,14 @@ public class FacilityClient {
         MaintenanceLog maintenanceLog = new MaintenanceLog();
         maintenanceLog.addInspection(inspection);
         maintenanceLog.addMaintenanceOrder(order);
+        maintenanceLog.addMaintenanceOrder(order2);
         maintenanceLog.addMaintenanceRequest(request);
         maintenanceLog.scheduleMaintenance(schedule);
+        maintenanceLog.getInspectionList();
+        maintenanceLog.getMaintenanceOrderList();
+        maintenanceLog.getMaintenanceRequestList();
+        maintenanceLog.getMaintenanceScheduleList();
         maintenanceLog.calcMaintenanceCostForFacility(facilityLocation);
-        maintenanceLog.calcDownTimeForFacilityRoom(facilityRoom1);
 
         Type type = new Type();
         type.setFacilityUseType("Lab");
@@ -104,6 +125,9 @@ public class FacilityClient {
         useSchedule.addFacilityRoom(facilityRoom1);
         useSchedule.addActualUsage(type);
         useSchedule.addUser(user);
+        useSchedule.getFacilityRooms();
+        useSchedule.getListUsers();
+        useSchedule.getListActualUsage();
 
 
     }
