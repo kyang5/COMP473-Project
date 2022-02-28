@@ -4,9 +4,9 @@ import com.university.model.facility.FacilityLocation;
 import com.university.model.facility.FacilityRoom;
 import java.util.*;
 public class MaintenanceLog {
-    private double cost;
+    //private double cost;
     private int inspectionLog;
-    private long downTime;
+    //private long downTime;
     private List<MaintenanceOrder> maintenanceList = new ArrayList<MaintenanceOrder>();
     private List<MaintenanceSchedule> scheduleList = new ArrayList<>();
     private List<MaintenanceRequest> requestList = new ArrayList<>();
@@ -84,19 +84,19 @@ public class MaintenanceLog {
     public void setRequestList(List<MaintenanceRequest> requestList) {
         this.requestList = requestList;
     }
-    public double getCost(){
-        return cost;
-    }
-    public long getDownTime(){
-        return downTime;
-    }
-    public void setDownTime(long downTime){
-        this.downTime = downTime;
-    }
-    public void setCost(int cost){
-        this.cost =cost;
+    //public double getCost(){
+   //     return cost;
+   // }
+    //public long getDownTime(){
+       // return downTime;
+    //}
+   // public void setDownTime(long downTime){
+    //    this.downTime = downTime;
+    //}
+    //public void setCost(int cost){
+     //   this.cost =cost;
 
-    }
+    //}
 
     public double calcMaintenanceCostForFacility(FacilityLocation facilityLocation){
 
@@ -109,10 +109,10 @@ public class MaintenanceLog {
         }
         return totalCost;
     }
-    public long calcDownTimeForFacility(){
+    public long calcDownTimeForFacilityRoom(FacilityRoom facilityRoom){
         long startDate = maintenanceSchedule.getMaintenanceStartDate().getTime();
         long endDate = maintenanceSchedule.getMaintenanceEndDate().getTime();
-        downTime = endDate - startDate;
+        long downTime = endDate - startDate;
         return downTime;
     }
 
