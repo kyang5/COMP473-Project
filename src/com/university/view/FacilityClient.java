@@ -125,6 +125,9 @@ public class FacilityClient {
         useSchedule.addFacilityRoom(facilityRoom1);
         useSchedule.addActualUsage(type);
         useSchedule.addUser(user);
+        useSchedule.getFacilityRooms();
+        useSchedule.getListUsers();
+        useSchedule.getListActualUsage();
 
 
     }
