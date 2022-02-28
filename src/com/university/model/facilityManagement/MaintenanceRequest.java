@@ -8,7 +8,7 @@ public class MaintenanceRequest {
     private int requestID;
     private Date requestDate;
     private int requestorID;
-    private Boolean requestStatus;
+    private String requestStatus;
     private String problem;
     private FacilityRoom facilityRoom;
 
@@ -19,7 +19,7 @@ public class MaintenanceRequest {
     public Date getRequestDate(){
         return requestDate;
     }
-    public Boolean requestStatus(){
+    public String requestStatus(){
         return requestStatus;
     }
     public int getRequestorID(){
@@ -46,7 +46,7 @@ public class MaintenanceRequest {
     public void setRequestorID(int requestorID){
         this.requestorID = requestorID;
     }
-    public void setRequestStatus(Boolean requestStatus){
+    public void setRequestStatus(String requestStatus){
         this.requestStatus = requestStatus;
     }
     public FacilityRoom getFacilityRoom(){

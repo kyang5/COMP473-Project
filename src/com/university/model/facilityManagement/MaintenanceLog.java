@@ -3,8 +3,6 @@ package com.university.model.facilityManagement;
 import com.university.model.facility.FacilityLocation;
 import com.university.model.facility.FacilityRoom;
 import java.util.*;
-//TODO address some questions about the list and calculations
-//TODO update documentation and UML Diagram for Objects and Lists.
 public class MaintenanceLog {
     private double cost;
     private int inspectionLog;
@@ -18,6 +16,7 @@ public class MaintenanceLog {
     //private MaintenanceWorker maintenanceWorker;
     //private MaintenanceRequest maintenanceRequest;
     //private FacilityRoom facilityRoom;
+
     public int getInspectionLog() {
 
         inspectionLog = inspectionList.size();

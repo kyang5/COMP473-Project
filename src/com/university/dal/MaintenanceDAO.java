@@ -28,7 +28,7 @@ public class MaintenanceDAO {
         while (inspectionRS.next() ) {
             inspection.setInspectionID(inspectionRS.getInt("inspectionID"));
             inspection.setInspectionName(inspectionRS.getString("inspectionName"));
-            inspection.setInspectionLog(inspectionRS.getInt("inspectionLog"));
+            //inspection.setInspectionLog(inspectionRS.getInt("inspectionLog"));
         }
         //close to manage resources
         inspectionRS.close();
@@ -69,15 +69,14 @@ public class MaintenanceDAO {
 
         try {
             //Insert the customer object
-            String inspectStm = "INSERT INTO Inspection(inspectionID, inspectionName, inspectionLog) VALUES(?, ?, ?)";
+            String inspectStm = "INSERT INTO Inspection(inspectionID, inspectionName) VALUES(?, ?, ?)";
             inspectPst = con.prepareStatement(inspectStm);
             inspectPst.setInt(1, inspect.getInspectionID());
             inspectPst.setString(2, inspect.getInspectionName());
-            inspectPst.setInt(3, inspect.getInspectionLog());
+            //inspectPst.setInt(3, inspect.getInspectionLog());
             inspectPst.executeUpdate();
 
-            //Insert the customer address object
-            String inspectorStm = "INSERT INTO Inspector(inspectionID, inspectorID, firstName, lastName, title) VALUES(?, ?, ?, ?, ?, ?, ?)";
+            String inspectorStm = "INSERT INTO Inspection(inspectionID, inspectorID, firstName, lastName, title) VALUES(?, ?, ?, ?, ?, ?, ?)";
             inspectorPst = con.prepareStatement(inspectorStm);
             inspectorPst.setInt(1, inspect.getInspectionID());
             inspectorPst.setInt(2, inspect.getInspector().getInspectorID());
@@ -105,10 +104,10 @@ public class MaintenanceDAO {
             }
         }
     }
-    public MaintenanceLog getMaintenanceLog(Date downTime) {
+    public MaintenanceLog getMaintenanceOrder(Date downTime) {
 
         try {
-            //Get Customer
+
             Statement st = DBHelper.getConnection().createStatement();
             String selectMaintenanceQuery = "SELECT downTime, cost FROM Customer WHERE downTime = '" + downTime + "'";
 
@@ -119,12 +118,12 @@ public class MaintenanceDAO {
             MaintenanceLog maintenanceLog = new MaintenanceLog();
             while ( maintenanceRS.next() ) {
                 //TDO Fix this.
-                maintenanceLog.setDownTime(maintenanceRS.getDate("customerID"));
+                maintenanceLog.setDownTime(maintenanceRS.getLong("customerID"));
                 maintenanceLog.setCost(maintenanceRS.getInt("cost"));
-                MaintenanceLog.setFirstName(maintenanceRS.getString("fname"));
+
             }
             //close to manage resources
-            custRS.close();
+            maintenanceRS.close();
 
             //Get Address
             String selectAddressQuery = "SELECT addressID, street, unit, city, state, zip FROM Address WHERE customerID = '" + customerId + "'";
