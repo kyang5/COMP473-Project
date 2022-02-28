@@ -36,7 +36,7 @@ public class FacilityDAO {
             facilityLocationRS.close();
 
             //Get facility manager
-            String selectFacilityManagerQuery = "SELECT managerID, managerFirstName, managerLastName FROM FacilityManager WHERE managerID = '" + managerId + "'";
+            String selectFacilityManagerQuery = "SELECT managerID, managerFirstName, managerLastName FROM FacilityManager WHERE facilityID = '" + facilityId + "'";
             ResultSet facilityManagerRS = st.executeQuery(selectFacilityManagerQuery);
             FacilityManager manager = new FacilityManager();
 
@@ -127,7 +127,7 @@ public class FacilityDAO {
             facilityRoomRS.close();
 
             //Get facilityLocation
-            String selectFacilityLocationQuery = "SELECT facilityID, name, addressNumber, streetName, city, zipcode FROM FacilityLocation WHERE roomID = '" + facilityId + "'";
+            String selectFacilityLocationQuery = "SELECT facilityID, name, addressNumber, streetName, city, zipcode FROM FacilityLocation WHERE facilityRoomID = '" + facilityRoomId + "'";
             ResultSet facilityLocationRS = st.executeQuery(selectFacilityLocationQuery);
             FacilityLocation facilityLocation = new FacilityLocation();
 
