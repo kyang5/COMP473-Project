@@ -54,12 +54,6 @@ public class Inspection {
     public List<Inspector> getInspectionList(){
         return inspectorList;
     }
-    public void addInspectorList(Inspector inspector){
-        inspectorList.add(inspector);
-    }
-    public void removeInspectorList(Inspector inspector){
-        inspectorList.remove(inspector);
-    }
 
 
 
