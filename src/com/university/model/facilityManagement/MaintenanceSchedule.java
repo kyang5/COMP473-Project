@@ -1,4 +1,6 @@
 package com.university.model.facilityManagement;
+import com.university.model.facility.FacilityRoom;
+
 import java.util.*;
 
 public class MaintenanceSchedule {
@@ -6,6 +8,7 @@ public class MaintenanceSchedule {
     private Date maintenanceStartDate;
     private Date maintenanceEndDate;
     private MaintenanceWorker maintenanceWorker;
+    private FacilityRoom facilityRoom;
 
 
     public Date getMaintenanceStartDate(){
@@ -27,5 +30,13 @@ public class MaintenanceSchedule {
     public void setMaintenanceWorker(MaintenanceWorker maintenanceWorker){
         this.maintenanceWorker = maintenanceWorker;
     }
+
+    public FacilityRoom getFacilityRoom() {
+        return facilityRoom;
     }
+
+    public void setFacilityRoom(FacilityRoom facilityRoom) {
+        this.facilityRoom = facilityRoom;
+    }
+}
 
