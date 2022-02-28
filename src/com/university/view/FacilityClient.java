@@ -104,7 +104,7 @@ public class FacilityClient {
         maintenanceLog.getMaintenanceOrderList();
         maintenanceLog.getMaintenanceRequestList();
         maintenanceLog.getMaintenanceScheduleList();
-        System.out.println(maintenanceLog.calcMaintenanceCostForFacility(facilityLocation));
+        maintenanceLog.calcMaintenanceCostForFacility(facilityLocation);
 
         Type type = new Type();
         type.setFacilityUseType("Lab");
