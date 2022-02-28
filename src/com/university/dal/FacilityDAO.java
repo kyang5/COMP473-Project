@@ -12,7 +12,7 @@ import java.sql.Statement;
 
 public class FacilityDAO {
 
-    public FacilityLocation getFacilityLocation(String facilityId) {
+    public FacilityLocation getFacilityLocation(int facilityId) {
         try {
             // Get facility location
             Statement st = DBHelper.getConnection().createStatement();
@@ -105,7 +105,7 @@ public class FacilityDAO {
         }
     }
 
-    public FacilityRoom getFacilityRoom(String facilityRoomId) {
+    public FacilityRoom getFacilityRoom(int facilityRoomId) {
 
         try {
             //Get facilityRoom
