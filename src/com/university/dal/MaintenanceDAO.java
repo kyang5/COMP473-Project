@@ -1,8 +1,6 @@
 package com.university.dal;
-import com.university.model.facilityManagement.Inspection;
-import com.university.model.facilityManagement.Inspector;
-import com.university.model.facilityManagement.MaintenanceLog;
-import com.university.model.facilityManagement.MaintenanceOrder;
+import com.university.model.facility.FacilityRoom;
+import com.university.model.facilityManagement.*;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,58 +8,58 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.*;
-
+//TODO Make sure that the ID is reading FROM the ROOM Class.
 public class MaintenanceDAO {
-    public MaintenanceDAO(){
+    public MaintenanceDAO() {
 
     }
-    public Inspection getInspection(int inspectionID){
+
+    public Inspection getInspection(int inspectionID) {
         try {
-        //Get Customer
-        Statement st = DBHelper.getConnection().createStatement();
-        String selectInspectionQuery = "SELECT inspectionID, inspectionName, inspectionLog FROM Inspection WHERE inspectionID = '" + inspectionID + "'";
+            //Get Customer
+            Statement st = DBHelper.getConnection().createStatement();
+            String selectInspectionQuery = "SELECT inspectionID, inspectionName, inspectionLog FROM Inspection WHERE inspectionID = '" + inspectionID + "'";
 
-        ResultSet inspectionRS = st.executeQuery(selectInspectionQuery);
-        System.out.println("MaintenanceDAO: *************** Query " + selectInspectionQuery);
+            ResultSet inspectionRS = st.executeQuery(selectInspectionQuery);
+            System.out.println("MaintenanceDAO: *************** Query " + selectInspectionQuery);
 
-        //Get Inspection
-        Inspection inspection = new Inspection();
-        while (inspectionRS.next() ) {
-            inspection.setInspectionID(inspectionRS.getInt("inspectionID"));
-            inspection.setInspectionName(inspectionRS.getString("inspectionName"));
-            //inspection.setInspectionLog(inspectionRS.getInt("inspectionLog"));
-        }
-        //close to manage resources
-        inspectionRS.close();
+            //Get Inspection
+            Inspection inspection = new Inspection();
+            while (inspectionRS.next()) {
+                inspection.setInspectionID(inspectionRS.getInt("inspectionID"));
+                inspection.setInspectionName(inspectionRS.getString("inspectionName"));
+                //inspection.setInspectionLog(inspectionRS.getInt("inspectionLog"));
+            }
+            //close to manage resources
+            inspectionRS.close();
 
-        //Get Inspector
-        String selectInspectorQuery = "SELECT inspectorID, firstName, lastName, title FROM Inspector WHERE inspectionID = '" + inspectionID + "'";
-        ResultSet inspectorRS = st.executeQuery(selectInspectorQuery);
-        Inspector inspector = new Inspector();
+            //Get Inspector
+            String selectInspectorQuery = "SELECT inspectorID, firstName, lastName, title FROM Inspector WHERE inspectionID = '" + inspectionID + "'";
+            ResultSet inspectorRS = st.executeQuery(selectInspectorQuery);
+            Inspector inspector = new Inspector();
 
-        System.out.println("MaintenanceDAO: *************** Query " + selectInspectorQuery);
+            System.out.println("MaintenanceDAO: *************** Query " + selectInspectorQuery);
 
-        while (inspectorRS.next() ) {
-            inspector.setInspectorID(inspectorRS.getInt("inspectorID"));
-            inspector.setInspectorFirstName(inspectorRS.getString("firstName"));
-            inspector.setInspectorLastName(inspectorRS.getString("lastName"));
-            inspector.setInspectorTitle(inspectorRS.getString("title"));
-        }
+            while (inspectorRS.next()) {
+                inspector.setInspectorID(inspectorRS.getInt("inspectorID"));
+                inspector.setInspectorFirstName(inspectorRS.getString("firstName"));
+                inspector.setInspectorLastName(inspectorRS.getString("lastName"));
+                inspector.setInspectorTitle(inspectorRS.getString("title"));
+            }
 
-        //close to manage resources
+            //close to manage resources
             inspectorRS.close();
-        st.close();
+            st.close();
 
-        return inspection;
-    }
-        catch (SQLException se) {
-        System.err.println("MaintenanceDAO: Threw a SQLException retrieving the customer object.");
-        System.err.println(se.getMessage());
-        se.printStackTrace();
-    }
+            return inspection;
+        } catch (SQLException se) {
+            System.err.println("MaintenanceDAO: Threw a SQLException retrieving the inspector object.");
+            System.err.println(se.getMessage());
+            se.printStackTrace();
+        }
 
         return null;
-}
+    }
 
     public void addInspection(Inspection inspect) {
         Connection con = DBHelper.getConnection();
@@ -70,14 +68,14 @@ public class MaintenanceDAO {
 
         try {
             //Insert the customer object
-            String inspectStm = "INSERT INTO Inspection(inspectionID, inspectionName) VALUES(?, ?, ?)";
+            String inspectStm = "INSERT INTO Inspection(inspectionID, inspectionName) VALUES(?, ?)";
             inspectPst = con.prepareStatement(inspectStm);
             inspectPst.setInt(1, inspect.getInspectionID());
             inspectPst.setString(2, inspect.getInspectionName());
             //inspectPst.setInt(3, inspect.getInspectionLog());
             inspectPst.executeUpdate();
 
-            String inspectorStm = "INSERT INTO Inspection(inspectionID, inspectorID, firstName, lastName, title) VALUES(?, ?, ?, ?, ?, ?, ?)";
+            String inspectorStm = "INSERT INTO Inspection(inspectionID, inspectorID, firstName, lastName, title) VALUES(?, ?, ?, ?, ?)";
             inspectorPst = con.prepareStatement(inspectorStm);
             inspectorPst.setInt(1, inspect.getInspectionID());
             inspectorPst.setInt(2, inspect.getInspector().getInspectorID());
@@ -100,11 +98,12 @@ public class MaintenanceDAO {
                 }
 
             } catch (SQLException ex) {
-                System.err.println("MaintenanceDAO: Threw a SQLException saving the customer object.");
+                System.err.println("MaintenanceDAO: Threw a SQLException saving the inspector object.");
                 System.err.println(ex.getMessage());
             }
         }
     }
+
     public MaintenanceOrder getMaintenanceOrder(int orderID) {
 
         try {
@@ -115,10 +114,10 @@ public class MaintenanceDAO {
             ResultSet maintenanceOrderRS = st.executeQuery(selectMaintenanceOrderQuery);
             System.out.println("MaintenanceDAO: *************** Query " + selectMaintenanceOrderQuery);
 
-            //Get Customer
+
             MaintenanceOrder maintenanceOrder = new MaintenanceOrder();
-            while ( maintenanceOrderRS.next() ) {
-                //TDO Fix this.
+            while (maintenanceOrderRS.next()) {
+
                 maintenanceOrder.setOrderID(maintenanceOrderRS.getInt("orderID"));
                 maintenanceOrder.setCost(maintenanceOrderRS.getDouble("cost"));
                 maintenanceOrder.setOrderType(maintenanceOrderRS.getString("orderType"));
@@ -129,30 +128,26 @@ public class MaintenanceDAO {
             maintenanceOrderRS.close();
 
 
-            String selectMaintenanceRoomQuery = "SELECT orderID, orderType, orderDate, cost FROM MaintenanceOrder WHERE orderID = '" + orderID + "'";
-            ResultSet maintRoomRS = st.executeQuery(selectMaintenanceRoomQuery);
-            Address address = new Address();
+            String selectFacilityRoomQuery = "SELECT facilityRoomId, capacity, roomNumber, phoneNumber, inUse FROM FacilityRoom WHERE orderID = '" + orderID + "'";
+            ResultSet roomRS = st.executeQuery(selectFacilityRoomQuery);
+            FacilityRoom room = new FacilityRoom();
 
-            System.out.println("MaintenanceDAO: *************** Query " + selectMaintenanceRoomQuery);
+            System.out.println("MaintenanceDAO: *************** Query " + selectFacilityRoomQuery);
 
-            while (addRS.next() ) {
-                address.setAddressId(addRS.getString("addressid"));
-                address.setStreet(addRS.getString("street"));
-                address.setUnit(addRS.getString("unit"));
-                address.setCity(addRS.getString("city"));
-                address.setState(addRS.getString("state"));
-                address.setZip(addRS.getString("zip"));
+            while (roomRS.next()) {
+                room.setFacilityRoomId(roomRS.getInt("facilityRoomId"));
+                room.setCapacity(roomRS.getInt("capacity"));
+                room.setRoomNumber(roomRS.getInt("roomNumber"));
+                room.setPhoneNumber(roomRS.getInt("phoneNumber"));
+                room.setInUse(roomRS.getBoolean("inUse"));
+
             }
-
-            customer.setBillingAddress(address);
-            //close to manage resources
-            addRS.close();
+            roomRS.close();
             st.close();
 
-            return customer;
-        }
-        catch (SQLException se) {
-            System.err.println("CustomerDAO: Threw a SQLException retrieving the customer object.");
+            return maintenanceOrder;
+        } catch (SQLException se) {
+            System.err.println("MaintenanceDAO: Threw a SQLException retrieving the maintenanceOrder object.");
             System.err.println(se.getMessage());
             se.printStackTrace();
         }
@@ -160,46 +155,231 @@ public class MaintenanceDAO {
         return null;
     }
 
-    public void addCustomer(Customer cust) {
+    public void addMaintenanceOrder(MaintenanceOrder maintenanceOrder) {
         Connection con = DBHelper.getConnection();
-        PreparedStatement custPst = null;
-        PreparedStatement addPst = null;
+        PreparedStatement maintOPst = null;
 
         try {
-            //Insert the customer object
-            String custStm = "INSERT INTO Customer(customerID, lname, fname) VALUES(?, ?, ?)";
-            custPst = con.prepareStatement(custStm);
-            custPst.setString(1, cust.getCustomerId());
-            custPst.setString(2, cust.getLastName());
-            custPst.setString(3, cust.getFirstName());
-            custPst.executeUpdate();
 
-            //Insert the customer address object
-            String addStm = "INSERT INTO Address(customerID, addressID, street, unit, city, state, zip) VALUES(?, ?, ?, ?, ?, ?, ?)";
-            addPst = con.prepareStatement(addStm);
-            addPst.setString(1, cust.getCustomerId());
-            addPst.setString(2, cust.getBillingAddress().getAddressId());
-            addPst.setString(3, cust.getBillingAddress().getStreet());
-            addPst.setString(4, cust.getBillingAddress().getUnit());
-            addPst.setString(5, cust.getBillingAddress().getCity());
-            addPst.setString(6, cust.getBillingAddress().getState());
-            addPst.setString(7, cust.getBillingAddress().getZip());
-            addPst.executeUpdate();
+            String maintOStm = "INSERT INTO MaintenanceOrder(orderID, orderType, orderDate, cost, facilityRoomId, roomNumber) VALUES(?, ?, ?, ?, ?, ?)";
+            maintOPst = con.prepareStatement(maintOStm);
+            maintOPst.setInt(1, maintenanceOrder.getOrderID());
+            maintOPst.setString(2, maintenanceOrder.getOrderType());
+            maintOPst.setDate(3, maintenanceOrder.getOrderDate());
+            maintOPst.setDouble(4, maintenanceOrder.getCost());
+            maintOPst.setInt(5, maintenanceOrder.getFacilityRoom().getFacilityRoomId());
+            maintOPst.setInt(6, maintenanceOrder.getFacilityRoom().getRoomNumber());
+            maintOPst.executeUpdate();
+
         } catch (SQLException ex) {
 
         } finally {
 
             try {
-                if (addPst != null) {
-                    addPst.close();
-                    custPst.close();
+                if (maintOPst != null) {
+                    maintOPst.close();
+
                 }
                 if (con != null) {
                     con.close();
                 }
 
             } catch (SQLException ex) {
-                System.err.println("CustomerDAO: Threw a SQLException saving the customer object.");
+                System.err.println("MaintenanceDAO: Threw a SQLException saving the MaintenanceOrder object.");
+                System.err.println(ex.getMessage());
+            }
+        }
+    }
+
+    public MaintenanceRequest getMaintenanceRequest(int requestID) {
+
+        try {
+
+            Statement st = DBHelper.getConnection().createStatement();
+            String selectRequestQuery = "SELECT requestType, requestID, requestDate, requestorID, requestStatus, problem FROM MaintenanceRequest WHERE requestID = '" + requestID + "'";
+
+            ResultSet maintenanceRequestRS = st.executeQuery(selectRequestQuery);
+            System.out.println("MaintenanceDAO: *************** Query " + selectRequestQuery);
+
+
+            MaintenanceRequest maintenanceRequest = new MaintenanceRequest();
+            while (maintenanceRequestRS.next()) {
+
+                maintenanceRequest.setRequestType(maintenanceRequestRS.getString("requestType"));
+                maintenanceRequest.setRequestID(maintenanceRequestRS.getInt("requestID"));
+                maintenanceRequest.setRequestDate(maintenanceRequestRS.getDate("requestDate"));
+                maintenanceRequest.setRequestorID(maintenanceRequestRS.getInt("requestorID"));
+                maintenanceRequest.setRequestStatus(maintenanceRequestRS.getString("requestStatus"));
+                maintenanceRequest.setProblem(maintenanceRequestRS.getString("problem"));
+
+            }
+            //close to manage resources
+            maintenanceRequestRS.close();
+
+
+            String selectFacilityRoomQuery = "SELECT facilityRoomId, capacity, roomNumber, phoneNumber, inUse FROM FacilityRoom WHERE requestID = '" + requestID + "'";
+            ResultSet roomRS = st.executeQuery(selectFacilityRoomQuery);
+            FacilityRoom room = new FacilityRoom();
+
+            System.out.println("MaintenanceDAO: *************** Query " + selectFacilityRoomQuery);
+
+            while (roomRS.next()) {
+                room.setFacilityRoomId(roomRS.getInt("facilityRoomId"));
+                room.setCapacity(roomRS.getInt("capacity"));
+                room.setRoomNumber(roomRS.getInt("roomNumber"));
+                room.setPhoneNumber(roomRS.getInt("phoneNumber"));
+                room.setInUse(roomRS.getBoolean("inUse"));
+
+            }
+            roomRS.close();
+            st.close();
+            return maintenanceRequest;
+        } catch (SQLException se) {
+            System.err.println("MaintenanceDAO: Threw a SQLException retrieving the maintenanceOrder object.");
+            System.err.println(se.getMessage());
+            se.printStackTrace();
+        }
+
+        return null;
+    }
+
+    public void addMaintenanceRequest(MaintenanceRequest maintenanceRequest) {
+        Connection con = DBHelper.getConnection();
+        PreparedStatement requestPst = null;
+
+        try {
+
+            String RequestStm = "INSERT INTO MaintenanceRequest(requestType, requestID, requestDate, requestorID, requestStatus, problem, facilityRoomId, roomNumber) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+            requestPst = con.prepareStatement(RequestStm);
+            requestPst.setString(1, maintenanceRequest.getRequestType());
+            requestPst.setInt(2, maintenanceRequest.getRequestID());
+            requestPst.setDate(3, maintenanceRequest.getRequestDate());
+            requestPst.setDouble(4, maintenanceRequest.getRequestorID());
+            requestPst.setString(5, maintenanceRequest.requestStatus());
+            requestPst.setString(6, maintenanceRequest.getProblem());
+            requestPst.setInt(7, maintenanceRequest.getFacilityRoom().getFacilityRoomId());
+            requestPst.setInt(8, maintenanceRequest.getFacilityRoom().getRoomNumber());
+            requestPst.executeUpdate();
+
+        } catch (SQLException ex) {
+
+        } finally {
+
+            try {
+                if (requestPst != null) {
+                    requestPst.close();
+
+                }
+                if (con != null) {
+                    con.close();
+                }
+
+            } catch (SQLException ex) {
+                System.err.println("MaintenanceDAO: Threw a SQLException saving the MaintenanceRequest object.");
+                System.err.println(ex.getMessage());
+            }
+        }
+    }
+
+    public MaintenanceSchedule getMaintenanceSchedule(int scheduleID) {
+
+        try {
+
+            Statement st = DBHelper.getConnection().createStatement();
+            String selectScheduleQuery = "SELECT maintenanceStartDate, maintenanceEndDate, scheduleID FROM MaintenanceSchedule WHERE scheduleID = '" + scheduleID + "'";
+
+            ResultSet scheduleRS = st.executeQuery(selectScheduleQuery);
+            System.out.println("MaintenanceDAO: *************** Query " + selectScheduleQuery);
+
+
+            MaintenanceSchedule maintenanceSchedule = new MaintenanceSchedule();
+            while (scheduleRS.next()) {
+
+                maintenanceSchedule.setMaintenanceStartDate(scheduleRS.getDate("maintenanceStartDate"));
+                maintenanceSchedule.setMaintenanceEndDate(scheduleRS.getDate("maintenanceEndDate"));
+                maintenanceSchedule.setScheduleID(scheduleRS.getInt("scheduleID"));
+
+
+            }
+            //close to manage resources
+            scheduleRS.close();
+
+
+            String selectFacilityScheduleRoomQuery = "SELECT facilityRoomId, capacity, roomNumber, phoneNumber, inUse FROM FacilityRoom WHERE scheduleID = '" + scheduleID + "'";
+            ResultSet roomScheduleRS = st.executeQuery(selectFacilityScheduleRoomQuery);
+            FacilityRoom roomSchedule = new FacilityRoom();
+
+            System.out.println("MaintenanceDAO: *************** Query " + selectFacilityScheduleRoomQuery);
+
+            while (roomScheduleRS.next()) {
+                roomSchedule.setFacilityRoomId(roomScheduleRS.getInt("facilityRoomId"));
+                roomSchedule.setCapacity(roomScheduleRS.getInt("capacity"));
+                roomSchedule.setRoomNumber(roomScheduleRS.getInt("roomNumber"));
+                roomSchedule.setPhoneNumber(roomScheduleRS.getInt("phoneNumber"));
+                roomSchedule.setInUse(roomScheduleRS.getBoolean("inUse"));
+
+            }
+            roomScheduleRS.close();
+            String selectWorkerQuery = "SELECT firstName, lastName, maintenanceWorkerID, title FROM MaintenanceWorker WHERE scheduleID = '" + scheduleID + "'";
+            ResultSet workerRS = st.executeQuery(selectWorkerQuery);
+            MaintenanceWorker worker = new MaintenanceWorker();
+
+
+            System.out.println("MaintenanceDAO: *************** Query " + selectWorkerQuery);
+
+            while (workerRS.next()) {
+                worker.setMaintFirstName(workerRS.getString("firstName"));
+                worker.setMaintLastName(workerRS.getString("lastName"));
+                worker.setMaintWorkerID(workerRS.getInt("maintenanceWorkerID"));
+                worker.setMaintTitle(workerRS.getString("title"));
+
+
+            }
+            workerRS.close();
+            st.close();
+
+
+            return maintenanceSchedule;
+        } catch (SQLException se) {
+            System.err.println("MaintenanceDAO: Threw a SQLException retrieving the maintenanceSchedule object.");
+            System.err.println(se.getMessage());
+            se.printStackTrace();
+        }
+
+        return null;
+    }
+
+    public void addMaintenanceSchedule(MaintenanceSchedule maintenanceSchedule) {
+        Connection con = DBHelper.getConnection();
+        PreparedStatement schedulePst = null;
+
+        try {
+
+            String scheduleStm = "INSERT INTO MaintenanceSchedule(maintenanceStartDate, maintenanceEndDate, scheduleID, facilityRoomId, roomNumber, maintenanceWorkerID) VALUES(?, ?, ?, ?, ?, ?)";
+            schedulePst = con.prepareStatement(scheduleStm);
+            schedulePst.setDate(1, maintenanceSchedule.getMaintenanceStartDate());
+            schedulePst.setDate(2, maintenanceSchedule.getMaintenanceEndDate());
+            schedulePst.setInt(3, maintenanceSchedule.getScheduleID());
+            schedulePst.setInt(4, maintenanceSchedule.getFacilityRoom().getFacilityRoomId());
+            schedulePst.setInt(5, maintenanceSchedule.getFacilityRoom().getRoomNumber());
+            schedulePst.setInt(6, maintenanceSchedule.getMaintenanceWorker().getMaintWorkerID());
+            schedulePst.executeUpdate();
+
+        } catch (SQLException ex) {
+
+        } finally {
+
+            try {
+                if (schedulePst != null) {
+                    schedulePst.close();
+
+                }
+                if (con != null) {
+                    con.close();
+                }
+
+            } catch (SQLException ex) {
+                System.err.println("MaintenanceDAO: Threw a SQLException saving the MaintenanceSchedule object.");
                 System.err.println(ex.getMessage());
             }
         }

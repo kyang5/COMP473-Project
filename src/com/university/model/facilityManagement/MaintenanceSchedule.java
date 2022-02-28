@@ -7,10 +7,16 @@ public class MaintenanceSchedule {
     //private Date maintenanceDate;
     private Date maintenanceStartDate;
     private Date maintenanceEndDate;
+    private int scheduleID;
     private MaintenanceWorker maintenanceWorker;
     private FacilityRoom facilityRoom;
 
-
+    public int getScheduleID(){
+        return scheduleID;
+    }
+    public void setScheduleID(int scheduleID){
+        this.scheduleID = scheduleID;
+    }
     public Date getMaintenanceStartDate(){
         return maintenanceStartDate;
     }
