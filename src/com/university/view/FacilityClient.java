@@ -15,12 +15,21 @@ public class FacilityClient {
         facilityLocation.setCity("Chicago");
         facilityLocation.setZipcode(123456);
 
-
         FacilityManager facilityManager = new FacilityManager();
+        facilityManager.setManagerId(1);
+        facilityManager.setManagerFirstName("Bob");
+        facilityManager.setManagerLastName("Doe");
         facilityLocation.setFacilityManager(facilityManager);
+        facilityManager.addFacilities(facilityLocation);
 
         FacilityRoom facilityRoom1 = new FacilityRoom();
         facilityRoom1.setFacilityRoomId(1);
+        facilityRoom1.setPhoneNumber(123-456-7890);
+        facilityRoom1.setCapacity(10);
+        facilityRoom1.setInUse(true);
+        facilityRoom1.setFacilityLocation(facilityLocation);
         facilityLocation.addFacilityRoom(facilityRoom1);
+
+
     }
 }
