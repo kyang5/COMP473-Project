@@ -7,7 +7,7 @@ import java.util.*;
 public class UseSchedule {
     private int availableCapacity;
     private int occupancy;
-    private boolean atCapacity;
+    //private boolean atCapacity;
     private double usageRate;
     private List<FacilityRoom> facilityRooms = new ArrayList<>();
     // date and time entered at the same time in same variable
@@ -18,12 +18,15 @@ public class UseSchedule {
 
 
     public boolean isAtCapacity() {
-        return atCapacity;
+        if (availableCapacity == 0) {
+            return true;
+        } else {
+            return false;}
     }
 
-    public void setAtCapacity(boolean atCapacity) {
-        this.atCapacity = atCapacity;
-    }
+    //public void setAtCapacity(boolean atCapacity) {
+      //  this.atCapacity = atCapacity;
+    //}
 
     public int getOccupancy() {
         return occupancy;
