@@ -2,6 +2,7 @@ package com.university.dal;
 import com.university.model.facilityManagement.Inspection;
 import com.university.model.facilityManagement.Inspector;
 import com.university.model.facilityManagement.MaintenanceLog;
+import com.university.model.facilityManagement.MaintenanceOrder;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -104,33 +105,35 @@ public class MaintenanceDAO {
             }
         }
     }
-    public MaintenanceLog getMaintenanceOrder(Date downTime) {
+    public MaintenanceOrder getMaintenanceOrder(int orderID) {
 
         try {
 
             Statement st = DBHelper.getConnection().createStatement();
-            String selectMaintenanceQuery = "SELECT downTime, cost FROM Customer WHERE downTime = '" + downTime + "'";
+            String selectMaintenanceOrderQuery = "SELECT orderID, orderType, orderDate, cost FROM MaintenanceOrder WHERE orderID = '" + orderID + "'";
 
-            ResultSet maintenanceRS = st.executeQuery(selectMaintenanceQuery);
-            System.out.println("MaintenanceDAO: *************** Query " + selectMaintenanceQuery);
+            ResultSet maintenanceOrderRS = st.executeQuery(selectMaintenanceOrderQuery);
+            System.out.println("MaintenanceDAO: *************** Query " + selectMaintenanceOrderQuery);
 
             //Get Customer
-            MaintenanceLog maintenanceLog = new MaintenanceLog();
-            while ( maintenanceRS.next() ) {
+            MaintenanceOrder maintenanceOrder = new MaintenanceOrder();
+            while ( maintenanceOrderRS.next() ) {
                 //TDO Fix this.
-                maintenanceLog.setDownTime(maintenanceRS.getLong("customerID"));
-                maintenanceLog.setCost(maintenanceRS.getInt("cost"));
+                maintenanceOrder.setOrderID(maintenanceOrderRS.getInt("orderID"));
+                maintenanceOrder.setCost(maintenanceOrderRS.getDouble("cost"));
+                maintenanceOrder.setOrderType(maintenanceOrderRS.getString("orderType"));
+                maintenanceOrder.setOrderDate(maintenanceOrderRS.getDate("orderDate"));
 
             }
             //close to manage resources
-            maintenanceRS.close();
+            maintenanceOrderRS.close();
 
-            //Get Address
-            String selectAddressQuery = "SELECT addressID, street, unit, city, state, zip FROM Address WHERE customerID = '" + customerId + "'";
-            ResultSet addRS = st.executeQuery(selectAddressQuery);
+
+            String selectMaintenanceRoomQuery = "SELECT orderID, orderType, orderDate, cost FROM MaintenanceOrder WHERE orderID = '" + orderID + "'";
+            ResultSet maintRoomRS = st.executeQuery(selectMaintenanceRoomQuery);
             Address address = new Address();
 
-            System.out.println("CustomerDAO: *************** Query " + selectAddressQuery);
+            System.out.println("MaintenanceDAO: *************** Query " + selectMaintenanceRoomQuery);
 
             while (addRS.next() ) {
                 address.setAddressId(addRS.getString("addressid"));
