@@ -11,10 +11,10 @@ public class MaintenanceOrder {
     private double cost;
     public FacilityRoom facilityRoom;
 
-    public MaintenanceOrder(FacilityRoom room){
-        this.facilityRoom = room;
+    //public MaintenanceOrder(FacilityRoom room){
+       // this.facilityRoom = room;
 
-    }
+    //}
 
     //product location
     //quantity maintenance orders list
@@ -22,7 +22,7 @@ public class MaintenanceOrder {
         return cost;
     }
 
-    public void setCost() {
+    public void setCost(double cost) {
         this.cost = cost;
     }
 
