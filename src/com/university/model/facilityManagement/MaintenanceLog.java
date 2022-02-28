@@ -7,12 +7,13 @@ import java.util.*;
 //TODO update documentation and UML Diagram for Objects and Lists.
 public class MaintenanceLog {
     private double cost;
-    private Date downTime;
     private int inspectionLog;
+    private long downTime;
     private List<MaintenanceOrder> maintenanceList = new ArrayList<MaintenanceOrder>();
     private List<MaintenanceSchedule> scheduleList = new ArrayList<>();
     private List<MaintenanceRequest> requestList = new ArrayList<>();
     private List<Inspection> inspectionList = new ArrayList<>();
+    private MaintenanceSchedule maintenanceSchedule;
     //private MaintenanceOrder maintenanceOrder;
     //private MaintenanceWorker maintenanceWorker;
     //private MaintenanceRequest maintenanceRequest;
@@ -87,32 +88,33 @@ public class MaintenanceLog {
     public double getCost(){
         return cost;
     }
-    public Date getDownTime(){
+    public long getDownTime(){
         return downTime;
+    }
+    public void setDownTime(long downTime){
+        this.downTime = downTime;
     }
     public void setCost(int cost){
         this.cost =cost;
 
     }
-    public void setDownTime(Date downTime){
-        this.downTime = downTime;
-    }
+
     public double calcMaintenanceCostForFacility(FacilityLocation facilityLocation){
-        //TODO enter the method for the calculations
-        //TODO check orderdetail order and product as a frame of reference for bookstore
+
         double totalCost = 0.0;
-        for (FacilityRoom room : facilityLocation.getListFacilityRooms().getRoomNumber()) {
+        for (FacilityRoom room : facilityLocation.getListFacilityRooms()) {
             for(MaintenanceOrder order: maintenanceList){
-                if(room==order.getFacilityRoom().getRoomNumber())
+                if(order.getFacilityRoom().equals(room))
                     totalCost+=order.getCost();
-                //facilityLocation.getListFacilityRooms()==
             }
-            total += totalSum.getProduct().getPrice() * totalSum.getQuantity();
         }
-        return total;
+        return totalCost;
     }
-    public void calcDownTimeForFacility(){
-        //TODO enter the method. Decide whether we need Time or Date as the value
+    public long calcDownTimeForFacility(){
+        long startDate = maintenanceSchedule.getMaintenanceStartDate().getTime();
+        long endDate = maintenanceSchedule.getMaintenanceEndDate().getTime();
+        downTime = endDate - startDate;
+        return downTime;
     }
 
 }
