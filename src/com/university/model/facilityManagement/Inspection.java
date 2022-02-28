@@ -51,7 +51,7 @@ public class Inspection {
         this.inspector = inspector;
     }
 
-    public List<Inspector> getInspectionList(List<Inspector> inspectorList){
+    public List<Inspector> getInspectionList(){
         return inspectorList;
     }
     public void addInspectorList(Inspector inspector){

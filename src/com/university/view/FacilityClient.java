@@ -35,6 +35,7 @@ public class FacilityClient {
         facilityRoom1.setInUse(true);
         facilityRoom1.setFacilityLocation(facilityLocation);
         facilityLocation.addFacilityRoom(facilityRoom1);
+        facilityLocation.getListFacilityRooms();
 
         Inspector inspector = new Inspector();
         inspector.setInspectorID(1);
@@ -48,6 +49,7 @@ public class FacilityClient {
         inspection.setInspector(inspector);
         inspection.setFacilityRoom(facilityRoom1);
         inspection.addInspector(inspector);
+        inspection.getInspectionList();
 
         MaintenanceRequest request = new MaintenanceRequest();
         request.setRequestType("Plumbing");
