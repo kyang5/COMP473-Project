@@ -20,11 +20,13 @@ class FacilityLocationTest {
     @org.junit.jupiter.api.BeforeEach
     void setUp() throws Exception{
         locationList = new ArrayList<>();
+        roomList = new ArrayList<>();
     }
 
     @org.junit.jupiter.api.AfterEach
     void tearDown() throws Exception{
         locationList = null;
+        roomList = null;
     }
 
     @org.junit.jupiter.api.Test
@@ -36,9 +38,8 @@ class FacilityLocationTest {
         facility.setStreetName("State Street");
         facility.setCity("Chicago");
         facility.setZipcode(123456);
-        locationList.add(facility); // TODO resolve issue
-        assertEquals(facility, locationList.contains(facility)); // TODO what would intValue() be replaced with
-    }
+        locationList.add(facility);
+        assertEquals(true, locationList.contains(facility));     }
 
     @org.junit.jupiter.api.Test
     void removeFacilityLocation() {
@@ -71,7 +72,7 @@ class FacilityLocationTest {
         facilityRoom1.setInUse(true);
         facilityRoom1.setFacilityLocation(facility);
         roomList.add(facilityRoom1);
-        assertEquals(facilityRoom1, roomList.contains(facilityRoom1));
+        assertEquals(true, roomList.contains(facilityRoom1));
     }
 
     @org.junit.jupiter.api.Test
