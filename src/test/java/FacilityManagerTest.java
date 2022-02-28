@@ -33,8 +33,8 @@ class FacilityManagerTest {
         facility.setStreetName("State Street");
         facility.setCity("Chicago");
         facility.setZipcode(123456);
-        locationList.add(facility); // TODO resolve issue
-        assertEquals(facility, locationList.contains(facility));
+        locationList.add(facility);
+        assertEquals(true, locationList.contains(facility));
     }
 
     @Test
