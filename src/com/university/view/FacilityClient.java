@@ -3,9 +3,10 @@ package com.university.view;
 import com.university.model.facility.FacilityLocation;
 import com.university.model.facility.FacilityManager;
 import com.university.model.facility.FacilityRoom;
+import com.university.model.facilityManagement.*;
 
 public class FacilityClient {
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws Exception{
 
         FacilityLocation facilityLocation = new FacilityLocation();
         facilityLocation.setFacilityId(1);
@@ -29,6 +30,40 @@ public class FacilityClient {
         facilityRoom1.setInUse(true);
         facilityRoom1.setFacilityLocation(facilityLocation);
         facilityLocation.addFacilityRoom(facilityRoom1);
+
+        Inspector inspector = new Inspector();
+        inspector.setInspectorID(1);
+        inspector.setInspectorFirstName("Dan");
+        inspector.setInspectorLastName("Tan");
+        inspector.setInspectorTitle("Fire Safety Inspector");
+
+        Inspection inspection = new Inspection();
+        inspection.setInspectionID(1);
+        inspection.setInspectionName("Fire safety");
+        inspection.setInspector(inspector);
+        inspection.setFacilityRoom(facilityRoom1);
+        inspection.addInspector(inspector);
+
+        MaintenanceRequest request = new MaintenanceRequest();
+        request.setRequestType("Plumbing");
+        request.setRequestID(1);
+        request.setRequestorID(1);
+
+
+        MaintenanceOrder order = new MaintenanceOrder();
+        order.setOrderType("Urgent");
+        order.setOrderID(1);
+        order.setOrderDate(2021, 03, 10, 23, 45);
+        order.setCost(100.0);
+        order.setFacilityRoom(facilityRoom1);
+
+        MaintenanceLog maintenanceLog = new MaintenanceLog();
+        maintenanceLog.addInspection(inspection);
+        maintenanceLog.addMaintenanceOrder(order);
+        maintenanceLog.addMaintenanceRequest();
+
+
+
 
 
     }
