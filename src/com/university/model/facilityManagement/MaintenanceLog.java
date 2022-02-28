@@ -109,11 +109,6 @@ public class MaintenanceLog {
         }
         return totalCost;
     }
-    public long calcDownTimeForFacilityRoom(FacilityRoom facilityRoom){
-        long startDate = maintenanceSchedule.getMaintenanceStartDate().getTime();
-        long endDate = maintenanceSchedule.getMaintenanceEndDate().getTime();
-        long downTime = endDate - startDate;
-        return downTime;
-    }
+
 
 }

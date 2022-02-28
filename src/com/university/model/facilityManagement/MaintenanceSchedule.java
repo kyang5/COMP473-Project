@@ -38,5 +38,12 @@ public class MaintenanceSchedule {
     public void setFacilityRoom(FacilityRoom facilityRoom) {
         this.facilityRoom = facilityRoom;
     }
+
+    public long calcDownTimeForFacilityRoom(Date maintenanceStartDate, Date maintenanceEndDate){
+        long startDate = maintenanceStartDate.getTime();
+        long endDate = maintenanceEndDate.getTime();
+        long downTime = endDate - startDate;
+        return downTime;
+    }
 }
 
