@@ -1,7 +1,10 @@
 package test.java;
 
+import com.university.model.facility.FacilityLocation;
+import com.university.model.facility.FacilityManager;
 import com.university.model.facility.FacilityRoom;
 import com.university.model.use.Type;
+import com.university.model.use.UseSchedule;
 import com.university.model.use.User;
 
 import java.util.ArrayList;
@@ -34,11 +37,8 @@ class UseScheduleTest {
 
     @org.junit.jupiter.api.AfterEach
     void tearDown() {
-        availableCapacity = null;
-        int occupancy;
-        double usageRate;
-        Date useStartDate;
-        Date useEndDate;
+        Date useStartDate = null;
+        Date useEndDate = null;
         listActualUsage = null;
         listUsers = null;
         facilityRooms = null;
@@ -50,6 +50,36 @@ class UseScheduleTest {
 
     @org.junit.jupiter.api.Test
     void requestAvailableCapacity() {
+
+        FacilityLocation facilityLocation = new FacilityLocation();
+        facilityLocation.setFacilityId(1);
+        facilityLocation.setName("Murphy Building");
+        facilityLocation.setAddressNumber(123);
+        facilityLocation.setStreetName("State Street");
+        facilityLocation.setCity("Chicago");
+        facilityLocation.setZipcode(123456);
+
+        FacilityManager facilityManager = new FacilityManager();
+        facilityManager.setManagerId(1);
+        facilityManager.setManagerFirstName("Bob");
+        facilityManager.setManagerLastName("Doe");
+        facilityLocation.setFacilityManager(facilityManager);
+        facilityManager.addFacilities(facilityLocation);
+
+        FacilityRoom facilityRoom1 = new FacilityRoom();
+        facilityRoom1.setFacilityRoomId(1);
+        facilityRoom1.setPhoneNumber(123-456-7890);
+        facilityRoom1.setCapacity(10);
+        facilityRoom1.setInUse(true);
+        facilityRoom1.setFacilityLocation(facilityLocation);
+        facilityLocation.addFacilityRoom(facilityRoom1);
+        UseSchedule useSchedule = new UseSchedule();
+        useSchedule.setOccupancy(10);
+        useSchedule.requestAvailableCapacity(facilityRoom1);
+        useSchedule.setUseStartDate(new Date(2020, 12, 1, 13, 45));
+        useSchedule.setUseEndDate(new Date(2020, 12, 22, 10, 15));
+        useSchedule.requestAvailableCapacity(facilityRoom1);
+        assertEquals(10, useSchedule.requestAvailableCapacity(facilityRoom1));
     }
 
     @org.junit.jupiter.api.Test
