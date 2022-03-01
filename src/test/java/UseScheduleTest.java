@@ -79,7 +79,7 @@ class UseScheduleTest {
         useSchedule.setUseStartDate(new Date(2020, 12, 1, 13, 45));
         useSchedule.setUseEndDate(new Date(2020, 12, 22, 10, 15));
         useSchedule.requestAvailableCapacity(facilityRoom1);
-        assertEquals(10, useSchedule.requestAvailableCapacity(facilityRoom1));
+        assertEquals(0, useSchedule.requestAvailableCapacity(facilityRoom1));
     }
 
     @org.junit.jupiter.api.Test
