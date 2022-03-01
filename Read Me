@@ -1,0 +1,11 @@
+Project Documentation
+By Kia Yang and Brett Fujioka
+This program is meant to simulate a facility maintenance and inspection log for a university. This
+program takes into consideration that there are multiple facilities or buildings and that each contains multiple rooms.
+Each room and facility is unique, ergo each of them possesses unique identifiers. Likewise, there are many maintenance
+workers,managers, and inspectors each possess unique identifiers. Each facility is assigned a manager.
+The lists each collect the data from their respective classes and call information from one another. For instance, the
+list for facilities will  assign room numbers and room id numbers in a separate list. Likewise, the maintenance
+log, requests, and schedule will collect a lists of which worker or inspector is designated certain tasks on certain
+dates for specified roles. The model generates and retrieves information from a Database. This assignment, however,
+doesn't provide its own data table, but assumes that there is one.
