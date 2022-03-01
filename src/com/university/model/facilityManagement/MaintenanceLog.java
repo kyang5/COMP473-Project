@@ -62,9 +62,6 @@ public class MaintenanceLog {
     public void setMaintenanceList(List<MaintenanceOrder> maintenanceList) {
         this.maintenanceList = maintenanceList;
     }
-    public List<MaintenanceSchedule> getScheduleList() {
-        return scheduleList;
-    }
 
     public List<MaintenanceSchedule> getMaintenanceScheduleList(){
         return scheduleList;
@@ -72,9 +69,6 @@ public class MaintenanceLog {
 
     public void setScheduleList(List<MaintenanceSchedule> scheduleList) {
         this.scheduleList = scheduleList;
-    }
-    public List<MaintenanceRequest> getRequestList() {
-        return requestList;
     }
 
     public List<MaintenanceRequest> getMaintenanceRequestList(){
