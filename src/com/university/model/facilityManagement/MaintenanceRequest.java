@@ -19,7 +19,7 @@ public class MaintenanceRequest {
     public Date getRequestDate(){
         return requestDate;
     }
-    public String requestStatus(){
+    public String getRequestStatus(){
         return requestStatus;
     }
     public int getRequestorID(){
