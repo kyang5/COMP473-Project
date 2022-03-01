@@ -1,5 +1,6 @@
 package com.university.model.use;
 
+import com.university.model.facility.FacilityLocation;
 import com.university.model.facility.FacilityRoom;
 
 import java.time.LocalDateTime;
@@ -89,7 +90,7 @@ public class UseSchedule {
         listActualUsage.remove(facilityUseType);
     }
 
-    public double calculateUsage() {
+    public double calculateUsage(List<FacilityRoom> facilityRooms) {
         // total number of rooms in a facility out of total number of rooms in a facility being used
         double totalRoomsInUse = 0.0;
         double totalRooms = 0;
@@ -119,10 +120,11 @@ public class UseSchedule {
         this.useEndDate = useEndDate;
     }
 
-    public void timeInterval() {
+    public long timeInterval(Date useStartDate, Date useEndDate) {
         long end = useEndDate.getTime();
         long start = useStartDate.getTime();
         long duration = end - start; //time duration in milliseconds
+        return duration;
     }
 
 }
