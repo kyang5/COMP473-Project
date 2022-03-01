@@ -8,7 +8,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.*;
-//TODO Make sure that the ID is reading FROM the ROOM Class.
 public class MaintenanceDAO {
     public MaintenanceDAO() {
 
@@ -165,7 +164,7 @@ public class MaintenanceDAO {
             maintOPst = con.prepareStatement(maintOStm);
             maintOPst.setInt(1, maintenanceOrder.getOrderID());
             maintOPst.setString(2, maintenanceOrder.getOrderType());
-            maintOPst.setDate(3, maintenanceOrder.getOrderDate());
+            maintOPst.setDate(3, (java.sql.Date) maintenanceOrder.getOrderDate());
             maintOPst.setDouble(4, maintenanceOrder.getCost());
             maintOPst.setInt(5, maintenanceOrder.getFacilityRoom().getFacilityRoomId());
             maintOPst.setInt(6, maintenanceOrder.getFacilityRoom().getRoomNumber());
@@ -253,7 +252,7 @@ public class MaintenanceDAO {
             requestPst = con.prepareStatement(RequestStm);
             requestPst.setString(1, maintenanceRequest.getRequestType());
             requestPst.setInt(2, maintenanceRequest.getRequestID());
-            requestPst.setDate(3, maintenanceRequest.getRequestDate());
+            requestPst.setDate(3, (java.sql.Date) maintenanceRequest.getRequestDate());
             requestPst.setDouble(4, maintenanceRequest.getRequestorID());
             requestPst.setString(5, maintenanceRequest.requestStatus());
             requestPst.setString(6, maintenanceRequest.getProblem());
@@ -357,8 +356,8 @@ public class MaintenanceDAO {
 
             String scheduleStm = "INSERT INTO MaintenanceSchedule(maintenanceStartDate, maintenanceEndDate, scheduleID, facilityRoomId, roomNumber, maintenanceWorkerID) VALUES(?, ?, ?, ?, ?, ?)";
             schedulePst = con.prepareStatement(scheduleStm);
-            schedulePst.setDate(1, maintenanceSchedule.getMaintenanceStartDate());
-            schedulePst.setDate(2, maintenanceSchedule.getMaintenanceEndDate());
+            schedulePst.setDate(1, (java.sql.Date) maintenanceSchedule.getMaintenanceStartDate());
+            schedulePst.setDate(2, (java.sql.Date) maintenanceSchedule.getMaintenanceEndDate());
             schedulePst.setInt(3, maintenanceSchedule.getScheduleID());
             schedulePst.setInt(4, maintenanceSchedule.getFacilityRoom().getFacilityRoomId());
             schedulePst.setInt(5, maintenanceSchedule.getFacilityRoom().getRoomNumber());
