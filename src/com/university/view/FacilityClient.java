@@ -37,11 +37,11 @@ public class FacilityClient {
         facilityLocation.addFacilityRoom(facilityRoom1);
 
         FacilityRoom facilityRoom2 = new FacilityRoom();
-        facilityRoom1.setFacilityRoomId(2);
-        facilityRoom1.setPhoneNumber(123-456-7890);
-        facilityRoom1.setCapacity(9);
-        facilityRoom1.setInUse(false);
-        facilityRoom1.setFacilityLocation(facilityLocation);
+        facilityRoom2.setFacilityRoomId(2);
+        facilityRoom2.setPhoneNumber(123-456-7890);
+        facilityRoom2.setCapacity(9);
+        facilityRoom2.setInUse(false);
+        facilityRoom2.setFacilityLocation(facilityLocation);
         facilityLocation.addFacilityRoom(facilityRoom2);
         facilityLocation.getListFacilityRooms();
 
@@ -93,6 +93,7 @@ public class FacilityClient {
         schedule.setMaintenanceStartDate(new Date(2021, 01, 25, 9,56));
         schedule.setMaintenanceWorker(worker);
         schedule.setFacilityRoom(facilityRoom1);
+
 
         MaintenanceLog maintenanceLog = new MaintenanceLog();
         maintenanceLog.addInspection(inspection);
