@@ -254,7 +254,7 @@ public class MaintenanceDAO {
             requestPst.setInt(2, maintenanceRequest.getRequestID());
             requestPst.setDate(3, (java.sql.Date) maintenanceRequest.getRequestDate());
             requestPst.setDouble(4, maintenanceRequest.getRequestorID());
-            requestPst.setString(5, maintenanceRequest.requestStatus());
+            requestPst.setString(5, maintenanceRequest.getRequestStatus());
             requestPst.setString(6, maintenanceRequest.getProblem());
             requestPst.setInt(7, maintenanceRequest.getFacilityRoom().getFacilityRoomId());
             requestPst.setInt(8, maintenanceRequest.getFacilityRoom().getRoomNumber());
