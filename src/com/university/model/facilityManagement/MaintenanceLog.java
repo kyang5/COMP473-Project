@@ -104,5 +104,17 @@ public class MaintenanceLog {
         return totalCost;
     }
 
-
+    public double calcProblemRateForFacility(FacilityLocation facilityLocation) {
+        double totalProblem = 0;
+        double totalRooms = 0;
+        for (FacilityRoom room: facilityLocation.getListFacilityRooms()) {
+            totalRooms += 1;
+            for(MaintenanceRequest request: requestList) {
+                if(request.getFacilityRoom().equals(room)) {
+                    totalProblem +=1;
+                }
+            }
+        }
+        return totalProblem/totalRooms;
+    }
 }
