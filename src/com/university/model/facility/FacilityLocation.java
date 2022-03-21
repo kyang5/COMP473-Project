@@ -62,6 +62,7 @@ public class FacilityLocation {
         this.zipcode = zipcode;
     }
 
+    // same as getFacilityInformation()
     public List<FacilityLocation> getListFacilities() {
         return listFacilities;
     }
@@ -86,6 +87,7 @@ public class FacilityLocation {
         this.listFacilityRooms = listFacilityRooms;
     }
 
+    // same as addFacilityDetail()
     public void addFacilityRoom (FacilityRoom facilityRoom) {
         listFacilityRooms.add(facilityRoom);
     }
