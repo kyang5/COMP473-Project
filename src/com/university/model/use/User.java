@@ -46,6 +46,7 @@ public class User {
         return facilityRoom;
     }
 
+    // assign FacilityDetail to user
     public void setFacilityRoom(FacilityRoom facilityRoom) {
         this.facilityRoom = facilityRoom;
     }

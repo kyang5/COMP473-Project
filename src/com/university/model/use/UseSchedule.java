@@ -82,6 +82,7 @@ public class UseSchedule {
         this.listActualUsage = listActualUsage;
     }
 
+    // assignFacilityToUse()
     public void addActualUsage (Type facilityUseType) {
         listActualUsage.add(facilityUseType);
     }
