@@ -71,6 +71,7 @@ public class MaintenanceLog {
         this.scheduleList = scheduleList;
     }
 
+    // same as listFacilityProblems()
     public List<MaintenanceRequest> getMaintenanceRequestList(){
         return requestList;
     }
