@@ -17,19 +17,15 @@ class UseScheduleTest {
     private int availableCapacity;
     private int occupancy;
     private double usageRate;
-    private Date useStartDate;
-    private Date useEndDate;
     private List<Type> listActualUsage = new ArrayList<>();
     private List<User> listUsers = new ArrayList<>();
-    private List<FacilityRoom> facilityRooms = new ArrayList<>();
+    private List<FacilityRoom> listFacilityRoomsInUse = new ArrayList<>();
 
     @org.junit.jupiter.api.BeforeEach
     void setUp() {
         int availableCapacity;
         int occupancy;
         double usageRate;
-        Date useStartDate;
-        Date useEndDate;
         List<Type> listActualUsage = new ArrayList<>();
         List<User> listUsers = new ArrayList<>();
         List<FacilityRoom> facilityRooms = new ArrayList<>();
@@ -37,11 +33,9 @@ class UseScheduleTest {
 
     @org.junit.jupiter.api.AfterEach
     void tearDown() {
-        Date useStartDate = null;
-        Date useEndDate = null;
         listActualUsage = null;
         listUsers = null;
-        facilityRooms = null;
+        listFacilityRoomsInUse = null;
     }
 
     @org.junit.jupiter.api.Test
@@ -68,42 +62,29 @@ class UseScheduleTest {
         facilityRoom1.setInUse(true);
         facilityRoom1.setFacilityLocation(facilityLocation);
 
+        Type type = new Type();
+        type.setFacilityUseType("Lab");
+        type.setFacilityRoom(facilityRoom1);
+        type.setUseStartDate(new Date(2020, 12, 1, 13, 45));
+        type.setUseEndDate(new Date(2020, 12, 22, 10, 15));
+        type.setOccupancy(10);
+
+        User user = new User();
+        user.setUserFirstName("Bob");
+        user.setUserLastName("Tom");
+        user.setUserId(1);
+        user.setUserTitle("Professor");
+
         UseSchedule useSchedule = new UseSchedule();
-        useSchedule.setOccupancy(10);
-        useSchedule.requestAvailableCapacity(facilityRoom1);
-        assertEquals(0, useSchedule.requestAvailableCapacity(facilityRoom1));
+        useSchedule.requestAvailableCapacity(facilityRoom1, type);
+        useSchedule.addActualUsage(type);
+        useSchedule.assignUserToFacilityRoom(user);
+
+        assertEquals(0, useSchedule.requestAvailableCapacity(facilityRoom1, type));
     }
 
     @org.junit.jupiter.api.Test
-    void addFacilityRoom() {
-        FacilityLocation facilityLocation = new FacilityLocation();
-        facilityLocation.setFacilityId(1);
-        facilityLocation.setName("Murphy Building");
-        facilityLocation.setAddressNumber(123);
-        facilityLocation.setStreetName("State Street");
-        facilityLocation.setCity("Chicago");
-        facilityLocation.setZipcode(123456);
-
-        FacilityManager facilityManager = new FacilityManager();
-        facilityManager.setManagerId(1);
-        facilityManager.setManagerFirstName("Bob");
-        facilityManager.setManagerLastName("Doe");
-        facilityLocation.setFacilityManager(facilityManager);
-
-        FacilityRoom facilityRoom1 = new FacilityRoom();
-        facilityRoom1.setFacilityRoomId(1);
-        facilityRoom1.setPhoneNumber(123-456-7890);
-        facilityRoom1.setCapacity(10);
-        facilityRoom1.setInUse(true);
-        facilityRoom1.setFacilityLocation(facilityLocation);
-
-        facilityRooms.add(facilityRoom1);
-
-        assertEquals(true, facilityRooms.contains(facilityRoom1));
-    }
-
-    @org.junit.jupiter.api.Test
-    void addUser() {
+    void assignUserToFacilityRoom() {
         FacilityLocation facilityLocation = new FacilityLocation();
         facilityLocation.setFacilityId(1);
         facilityLocation.setName("Murphy Building");
@@ -127,12 +108,19 @@ class UseScheduleTest {
         facilityRoom1.setFacilityLocation(facilityLocation);
         facilityLocation.addFacilityRoom(facilityRoom1);
 
+        Type type = new Type();
+        type.setFacilityUseType("Lab");
+        type.setFacilityRoom(facilityRoom1);
+        type.setUseStartDate(new Date(2020, 12, 1, 13, 45));
+        type.setUseEndDate(new Date(2020, 12, 22, 10, 15));
+        type.setOccupancy(10);
+
         User user = new User();
         user.setUserFirstName("Bob");
         user.setUserLastName("Tom");
         user.setUserId(1);
         user.setUserTitle("Professor");
-        user.setFacilityRoom(facilityRoom1);
+        user.setUseType(type);
 
         listUsers.add(user);
 
@@ -164,12 +152,16 @@ class UseScheduleTest {
         facilityRoom1.setFacilityLocation(facilityLocation);
         facilityLocation.addFacilityRoom(facilityRoom1);
 
+        Type type = new Type();
+        type.setFacilityUseType("Lab");
+        type.setFacilityRoom(facilityRoom1);
+
         User user = new User();
         user.setUserFirstName("Bob");
         user.setUserLastName("Tom");
         user.setUserId(1);
         user.setUserTitle("Professor");
-        user.setFacilityRoom(facilityRoom1);
+        user.setUseType(type);
 
         listUsers.add(user);
         listUsers.remove(user);
@@ -267,22 +259,31 @@ class UseScheduleTest {
         facilityRoom1.setFacilityLocation(facilityLocation);
 
         UseSchedule useSchedule = new UseSchedule();
+        listFacilityRoomsInUse.add(facilityRoom1);
 
-        facilityRooms.add(facilityRoom1);
-
-        double result = useSchedule.calculateUsage(facilityRooms);
+        double result = useSchedule.calculateUsage(listFacilityRoomsInUse);
 
         assertEquals(1.0, result);
     }
 
     @org.junit.jupiter.api.Test
     void timeInterval() {
-        UseSchedule useSchedule = new UseSchedule();
-        useSchedule.setUseStartDate(new Date(2020, 12, 1, 13, 45));
-        useSchedule.setUseEndDate(new Date(2020, 12, 22, 10, 15));
 
-        long result = useSchedule.timeInterval(useSchedule.getUseStartDate(), useSchedule.getUseEndDate());
+        Type type = new Type();
+        type.setFacilityUseType("Lab");
+        type.setUseStartDate(new Date(2020, 12, 1, 13, 45));
+        type.setUseEndDate(new Date(2020, 12, 22, 10, 15));
+        type.setOccupancy(10);
+
+        UseSchedule useSchedule = new UseSchedule();
+        useSchedule.addActualUsage(type);
+
+        long result = useSchedule.timeInterval(type);
 
         assertEquals(1801800000, result);
+    }
+
+    void addFacilityRoomToListFacilityRoomsInUse() {
+
     }
 }
