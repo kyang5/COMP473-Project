@@ -106,30 +106,29 @@ public class FacilityClient {
         maintenanceLog.getMaintenanceRequestList();
         maintenanceLog.getMaintenanceScheduleList();
         maintenanceLog.calcMaintenanceCostForFacility(facilityLocation);
-        System.out.println(maintenanceLog.calcProblemRateForFacility(facilityLocation));
+        maintenanceLog.calcProblemRateForFacility(facilityLocation);
 
         Type type = new Type();
         type.setFacilityUseType("Lab");
         type.setFacilityRoom(facilityRoom1);
+        type.setUseStartDate(new Date(2020, 12, 1, 13, 45));
+        type.setUseEndDate(new Date(2020, 12, 22, 10, 15));
+        type.setOccupancy(10);
 
         User user = new User();
         user.setUserFirstName("Bob");
         user.setUserLastName("Tom");
         user.setUserId(1);
         user.setUserTitle("Professor");
-        user.setFacilityRoom(facilityRoom1);
 
         UseSchedule useSchedule = new UseSchedule();
-        useSchedule.setOccupancy(10);
-        useSchedule.requestAvailableCapacity(facilityRoom1);
-        useSchedule.setUseStartDate(new Date(2020, 12, 1, 13, 45));
-        useSchedule.setUseEndDate(new Date(2020, 12, 22, 10, 15));
-        useSchedule.addFacilityRoom(facilityRoom1);
+        useSchedule.requestAvailableCapacity(facilityRoom1, type);
         useSchedule.addActualUsage(type);
-        useSchedule.addUser(user);
-        useSchedule.getFacilityRooms();
+        useSchedule.assignUserToFacilityRoom(user);
+        useSchedule.addFacilityRoomToListFacilityRoomsInUse(type);
         useSchedule.getListUsers();
         useSchedule.getListActualUsage();
+        useSchedule.getListFacilityRoomsInUse();
 
 
     }
